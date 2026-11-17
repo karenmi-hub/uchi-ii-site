@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Личный кабинет — Учи ИИ</title>
+<meta name="description" content="Вход и регистрация: ваши курсы, доступ к разбору работ и настройки аккаунта.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F6F3EC">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script>(function(d){d.className+=' no-js';try{var t=localStorage.getItem('rz-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="account">
+<a class="skip" href="#main">К содержанию</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="page-hero" data-scene="page">
+    <div class="pl-head"><div class="container">
+      <nav class="crumbs" aria-label="Путь"><a href="index.html">Главная</a> / Личный кабинет</nav>
+      <h1 id="acc-title">Личный кабинет</h1>
+      <p class="lead" id="acc-lead">Здесь хранятся ваши курсы и доступ к разбору работ.</p>
+    </div></div>
+  </section>
+
+  <section class="section" style="padding-top:48px">
+    <div class="container">
+
+      <!-- Сервер не подключён -->
+      <div id="v-noapi" hidden class="auth-wrap">
+        <div class="auth-card">
+          <h2>Кабинет скоро откроется</h2>
+          <p>Вход и покупки работают, когда подключён сервер сайта. Если вы владелец сайта — инструкция в deploy.md, а проверить всё на своём компьютере можно, запустив start-local.bat.</p>
+          <a class="btn" href="courses.html">К курсам</a>
+        </div>
+      </div>
+
+      <!-- Вход и регистрация -->
+      <div id="v-auth" hidden class="auth-wrap">
+        <div class="auth-card">
+          <div class="auth-tabs" role="tablist">
+            <button type="button" role="tab" id="t-login" aria-selected="true">Вход</button>
+            <button type="button" role="tab" id="t-reg" aria-selected="false">Регистрация</button>
+          </div>
+
+          <form id="f-login" novalidate>
+            <div class="form-msg err" hidden></div>
+            <div class="field"><label class="l" for="l-login">Ник в Telegram или почта</label>
+              <input type="text" id="l-login" name="login" autocomplete="username" placeholder="@ваш_ник" required></div>
+            <div class="field"><label class="l" for="l-pass">Пароль</label>
+              <div class="pw-wrap"><input type="password" id="l-pass" name="password" autocomplete="current-password" required style="padding-right:80px"><button type="button" data-pw>показать</button></div></div>
+            <button class="btn wide" type="submit">Войти</button>
+            <p style="margin:16px 0 0;font-size:14.5px"><button class="link-btn" type="button" id="to-forgot">Забыли пароль?</button></p>
+          </form>
+
+          <form id="f-reg" novalidate hidden>
+            <div class="form-msg err" hidden></div>
+            <div class="field"><label class="l" for="r-name">Как к вам обращаться</label>
+              <input type="text" id="r-name" name="name" autocomplete="name" maxlength="80" required></div>
+            <div class="field"><label class="l" for="r-tg">Ник в Telegram</label>
+              <input type="text" id="r-tg" name="tg" autocomplete="username" placeholder="@ваш_ник" maxlength="33" required>
+              <div class="hint"><span>По нему вы будете входить. Занятия и разборы приходят в Telegram.</span></div></div>
+            <div class="field"><label class="l" for="r-email">Почта <span class="opt">— необязательно, для чеков</span></label>
+              <input type="email" id="r-email" name="email" autocomplete="email" maxlength="200"></div>
+            <div class="field"><label class="l" for="r-pass">Пароль</label>
+              <div class="pw-wrap"><input type="password" id="r-pass" name="password" autocomplete="new-password" minlength="8" required style="padding-right:80px"><button type="button" data-pw>показать</button></div>
+              <div class="hint"><span>Не короче 8 символов.</span></div></div>
+            <label class="check"><input type="checkbox" name="consent" required><span>Согласен на обработку имени, ника и почты, чтобы вести аккаунт и курсы. <a href="privacy.html" target="_blank" rel="noopener">Политика обработки данных</a></span></label>
+            <button class="btn wide" type="submit">Создать аккаунт</button>
+          </form>
+        </div>
+        <p class="mut center" style="font-size:13.5px;margin-top:16px">Навигатор и бесплатные занятия работают и без аккаунта.</p>
+      </div>
+
+      <!-- Восстановление пароля -->
+      <div id="v-forgot" hidden class="auth-wrap">
+        <form class="auth-card" id="f-forgot" novalidate>
+          <h2>Новый пароль</h2>
+          <p>Если к аккаунту подключён Telegram, бот пришлёт ссылку для нового пароля. Не подключён — <a href="#support" data-support="form" data-kind="question" data-msg="Не могу войти в аккаунт. Мой ник в Telegram: ">напишите нам</a>, поможем.</p>
+          <div class="form-msg" hidden></div>
+          <div class="field"><label class="l" for="fg-login">Ник в Telegram или почта</label>
+            <input type="text" id="fg-login" name="login" autocomplete="username" required></div>
+          <button class="btn wide" type="submit">Прислать ссылку в Telegram</button>
+          <p style="margin:16px 0 0;font-size:14.5px"><button class="link-btn" type="button" data-back>← Назад ко входу</button></p>
+        </form>
+      </div>
+
+      <div id="v-reset" hidden class="auth-wrap">
+        <form class="auth-card" id="f-reset" novalidate>
+          <h2>Придумайте новый пароль</h2>
+          <p>После сохранения вы войдёте автоматически, а на остальных устройствах выйдете.</p>
+          <div class="form-msg err" hidden></div>
+          <div class="field"><label class="l" for="rs-pass">Новый пароль</label>
+            <div class="pw-wrap"><input type="password" id="rs-pass" name="password" autocomplete="new-password" minlength="8" required style="padding-right:80px"><button type="button" data-pw>показать</button></div></div>
+          <button class="btn wide" type="submit">Сохранить пароль</button>
+        </form>
+      </div>
+
+      <!-- Кабинет -->
+      <div id="v-cab" hidden class="cab">
+        <aside>
+          <div class="panel">
+            <div class="who"><span class="ava" id="c-ava"></span><div><b id="c-name"></b><span id="c-tg"></span></div></div>
+            <div id="c-tgstate"></div>
+            <button class="btn ghost wide" type="button" id="logout" style="margin-top:16px">Выйти</button>
+          </div>
+          <div class="panel">
+            <h3>Профиль</h3>
+            <form id="f-profile" novalidate>
+              <div class="form-msg" hidden></div>
+              <div class="field"><label class="l" for="p-name">Имя</label><input type="text" id="p-name" name="name" maxlength="80"></div>
+              <div class="field"><label class="l" for="p-tg">Ник в Telegram</label><input type="text" id="p-tg" name="tg" maxlength="33"></div>
+              <div class="field"><label class="l" for="p-email">Почта</label><input type="email" id="p-email" name="email" maxlength="200"></div>
+              <button class="btn ghost wide" type="submit">Сохранить</button>
+            </form>
+            <details class="more"><summary>Сменить пароль</summary>
+              <form id="f-pass" novalidate style="margin-top:12px">
+                <div class="form-msg" hidden></div>
+                <div class="field"><label class="l" for="pw-old">Текущий пароль</label><input type="password" id="pw-old" name="old" autocomplete="current-password"></div>
+                <div class="field"><label class="l" for="pw-new">Новый пароль</label><input type="password" id="pw-new" name="password" autocomplete="new-password" minlength="8"></div>
+                <button class="btn ghost wide" type="submit">Сменить пароль</button>
+              </form>
+            </details>
+            <details class="more"><summary>Удалить аккаунт</summary>
+              <form id="f-del" novalidate style="margin-top:12px">
+                <p style="font-size:14px;color:var(--ink2)">Имя, ник, почта и записи на курсы сотрутся сразу и навсегда. Сведения об оплатах хранятся по правилам учёта, но без ваших данных.</p>
+                <div class="form-msg err" hidden></div>
+                <div class="field"><label class="l" for="del-pass">Пароль для подтверждения</label><input type="password" id="del-pass" name="password" autocomplete="current-password"></div>
+                <button class="btn ghost wide danger" type="submit">Удалить аккаунт</button>
+              </form>
+            </details>
+          </div>
+        </aside>
+        <div>
+          <div class="panel">
+            <h2>Мои курсы</h2>
+            <div id="c-courses"></div>
+          </div>
+          <div class="panel" id="c-lessons-panel" hidden>
+            <h2>Занятия курса «ИИ в вашей работе»</h2>
+            <p class="mut" id="c-lessons-note" style="font-size:14.5px;margin:0 0 6px"></p>
+            <div id="c-lessons" class="lessons-read"></div>
+          </div>
+          <div class="panel" id="c-review-panel" hidden>
+            <h3>Отзыв о курсе</h3>
+            <p class="mut" style="font-size:14.5px;margin:0 0 12px">Что получилось, что было сложно. Отзыв появится на сайте после проверки.</p>
+            <p id="rv-state" class="form-msg ok" hidden></p>
+            <form id="f-review" novalidate>
+              <div class="form-msg" hidden></div>
+              <div class="field"><label class="l" for="rv-name">Как подписать</label><input type="text" id="rv-name" name="name" maxlength="60"></div>
+              <div class="field"><label class="l" for="rv-role">Профессия <span class="opt">— необязательно</span></label><input type="text" id="rv-role" name="role" maxlength="80" placeholder="например, бухгалтер"></div>
+              <div class="field"><label class="l" for="rv-result">Главный результат одной фразой <span class="opt">— необязательно</span></label><input type="text" id="rv-result" name="result" maxlength="90" placeholder="например: письма клиентам — за пару минут"></div>
+              <div class="field"><label class="l" for="rv-text">Отзыв</label><textarea id="rv-text" name="text" maxlength="1200"></textarea></div>
+              <label class="check"><input type="checkbox" name="agree"><span>Согласен, чтобы отзыв с этой подписью был опубликован на сайте</span></label>
+              <button class="btn ghost wide" type="submit">Отправить отзыв</button>
+            </form>
+          </div>
+          <div class="panel" id="c-wait-panel" hidden>
+            <h3>Записи на будущие курсы</h3>
+            <div id="c-wait"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/config.js"></script>
+<script src="data.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/account.js"></script>
+</body>
+</html>

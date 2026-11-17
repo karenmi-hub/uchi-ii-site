@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Оплата курса — Учи ИИ</title>
+<meta name="description" content="Оплата курса «Учи ИИ» картой или через СБП на защищённой странице Робокассы. Доступ открывается сразу после оплаты.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F6F3EC">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script>(function(d){d.className+=' no-js';try{var t=localStorage.getItem('rz-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="pay">
+<a class="skip" href="#main">К содержанию</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="page-hero" data-scene="page">
+    <div class="pl-head"><div class="container">
+      <nav class="crumbs" aria-label="Путь"><a href="index.html">Главная</a> / <a href="courses.html">Курсы</a> / Оплата</nav>
+      <h1>Оплата курса</h1>
+      <p class="lead">Картой или через СБП на защищённой странице Робокассы. Курс откроется в личном кабинете и в Telegram-боте сразу после оплаты.</p>
+    </div></div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="pay-grid">
+        <form class="pay-form" id="pay-form" novalidate>
+          <fieldset>
+            <legend><span>1</span>Выберите курс</legend>
+            <div class="pay-courses" id="pay-courses"><p class="mut">Загружаем курсы…</p></div>
+          </fieldset>
+
+          <div id="pay-auth" class="pay-auth" hidden>
+            <b>Войдите или создайте аккаунт</b>
+            <p>Курс привязывается к аккаунту: так он появится в личном кабинете, а при подключённом Telegram — и в боте. Регистрация — минута.</p>
+            <a class="btn" id="pay-login" href="account.html">Войти или зарегистрироваться</a>
+          </div>
+
+          <fieldset id="pay-step2">
+            <legend><span>2</span>Куда прислать чек</legend>
+            <div class="field">
+              <label class="l" for="pay-email">Электронная почта</label>
+              <input type="email" id="pay-email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.ru">
+              <p class="hint">Сюда придёт кассовый чек. Больше ничего не пришлём.</p>
+            </div>
+            <label class="check"><input type="checkbox" name="consent" id="pay-consent"><span>Принимаю условия <a href="offer.html" target="_blank" rel="noopener">публичной оферты</a> и даю согласие на обработку данных по <a href="privacy.html" target="_blank" rel="noopener">политике</a></span></label>
+          </fieldset>
+
+          <div class="form-msg err" id="pay-msg" hidden></div>
+          <button class="btn wide pay-btn" type="submit" id="pay-btn" disabled>Оплатить</button>
+          <p class="pay-secure">Вы перейдёте на защищённую страницу Робокассы. Данные карты вводятся только там — мы их не видим и не храним. Автопродления нет.</p>
+        </form>
+
+        <aside class="pay-sum" id="pay-sum" aria-live="polite">
+          <span class="pay-k">Ваш заказ</span>
+          <div id="pay-sum-body"><p class="mut">Выберите курс слева.</p></div>
+          <div class="pay-methods">
+            <span>Способы оплаты</span>
+            <ul><li>Банковская карта</li><li>СБП</li><li>SberPay</li></ul>
+            <small>Точный список — на странице Робокассы, он зависит от настроек магазина.</small>
+          </div>
+          <ul class="pay-facts">
+            <li>Доступ открывается автоматически, обычно за несколько секунд</li>
+            <li>Чек приходит на почту</li>
+            <li>Вернуть деньги можно по <a href="offer.html">условиям оферты</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/config.js"></script>
+<script src="data.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/pay.js"></script>
+</body>
+</html>

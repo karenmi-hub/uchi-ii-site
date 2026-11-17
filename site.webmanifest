@@ -1,0 +1,16 @@
+{
+  "name": "Учи ИИ — навигатор по профессиям в эпоху нейросетей",
+  "short_name": "Учи ИИ",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#F6F3EC",
+  "theme_color": "#4B33FF",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "assets/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

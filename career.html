@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Подбор профессии — Учи ИИ</title>
+<meta name="description" content="Отметьте, что вы умеете и что вам нравится, — и получите список из 30 профессий с процентом совпадения: что у вас уже есть, чему предстоит научиться и сколько это займёт.">
+<meta property="og:title" content="Подбор профессии: 30 направлений под ваши навыки">
+<meta property="og:description" content="Три коротких шага — и ранжированный список профессий с объяснением.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta name="theme-color" content="#F6F3EC">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script>(function(d){d.className+=' no-js';try{var t=localStorage.getItem('rz-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/tools.css">
+<link rel="stylesheet" href="assets/css/learn.css">
+</head>
+<body data-page="career">
+<a class="skip" href="#main">К содержанию</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="page-hero" data-scene="page">
+    <div class="pl-head"><div class="container">
+      <nav class="crumbs" aria-label="Путь"><a href="index.html">Главная</a> / Подбор профессии</nav>
+      <h1>Подберём профессию под ваши навыки</h1>
+      <p class="lead">Три коротких шага — и список из <span id="cr-count">30</span> направлений по порядку: что у вас уже есть, чему предстоит научиться и сколько это займёт. Без регистрации.</p>
+    </div></div>
+  </section>
+
+  <section class="section" id="career">
+    <div class="container">
+      <ol class="cr-steps" aria-label="Шаги">
+        <li class="on"><b>1</b>Кем работаете</li><li><b>2</b>Что умеете</li><li><b>3</b>Что нравится</li><li><b>4</b>Результат</li>
+      </ol>
+
+      <div class="cr-step" id="cs1">
+        <h2>Кем вы работаете сейчас?</h2>
+        <p class="mut">Выберите — и мы сами отметим типичные навыки. Потом их можно поправить. Нет вашей профессии — просто нажмите «Дальше».</p>
+        <div class="field"><input type="text" id="cr-q" placeholder="Начните печатать: бухгалтер, учитель, инженер…" aria-label="Профессия" autocomplete="off"></div>
+        <div class="chips" id="cr-from"></div>
+        <div class="cr-nav"><span></span><button class="btn" type="button" data-go="2">Дальше →</button></div>
+      </div>
+
+      <div class="cr-step" id="cs2" hidden>
+        <h2>Что вы умеете?</h2>
+        <p class="mut">Отметьте всё, что делаете уверенно — на работе или вне её. <span id="cr-skn"></span></p>
+        <div id="cr-skills"></div>
+        <div class="cr-nav"><button class="btn ghost" type="button" data-go="1">← Назад</button><button class="btn" type="button" data-go="3" id="cr-n2">Дальше →</button></div>
+      </div>
+
+      <div class="cr-step" id="cs3" hidden>
+        <h2>Что вам нравится делать?</h2>
+        <p class="mut">Можно выбрать несколько.</p>
+        <div class="chips" id="cr-likes"></div>
+        <h2 style="margin-top:28px">Сколько времени готовы учиться?</h2>
+        <p class="mut">При 6–8 часах в неделю.</p>
+        <div class="chips" id="cr-time"></div>
+        <div class="cr-nav"><button class="btn ghost" type="button" data-go="2">← Назад</button><button class="btn" type="button" data-go="4">Показать профессии →</button></div>
+      </div>
+
+      <div class="cr-step" id="cs4" hidden>
+        <div class="cr-res-h">
+          <div><h2>Ваши профессии</h2><p class="mut" id="cr-sum"></p></div>
+          <button class="btn ghost sm" type="button" data-go="2">Изменить ответы</button>
+        </div>
+        <div class="chips cr-filters" id="cr-filters"></div>
+        <div id="cr-list"></div>
+        <div class="callout" style="margin-top:28px">
+          <span class="tag">Как мы считаем</span>
+          <p>Процент — это совпадение ваших ответов с тем, что нужно в профессии: навыки (60%), интересы (25%) и срок (15%). Это ориентир для разговора с собой, а не прогноз и не гарантия работы. Сроки — наша оценка для учёбы с нуля в этой области. Пометка WEF стоит только у профессий из отчёта Future of Jobs 2025.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/config.js"></script>
+<script src="data.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/career.js"></script>
+</body>
+</html>

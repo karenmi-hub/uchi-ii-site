@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Пробный курс: первые шаги с ИИ — Учи ИИ</title>
+<meta name="description" content="Бесплатный пробный курс: пять коротких уроков о том, как ставить ИИ задачу, давать пример и проверять ответ. Без регистрации.">
+<meta property="og:title" content="Пробный курс «Учи ИИ»: первые шаги с ИИ">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta name="theme-color" content="#F6F3EC">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script>(function(d){d.className+=' no-js';try{var t=localStorage.getItem('rz-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+.trial{display:grid;grid-template-columns:270px 1fr;gap:36px;align-items:start}
+@media(max-width:900px){.trial{grid-template-columns:1fr}}
+.t-side{position:sticky;top:calc(var(--hdr) + 20px);background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+@media(max-width:900px){.t-side{position:static}}
+.t-prog{height:8px;background:var(--sunk);border-radius:999px;overflow:hidden;margin:10px 0 16px}
+.t-prog i{display:block;height:100%;width:0;background:var(--amber);border-radius:999px;transition:width .5s var(--ease)}
+.t-list{list-style:none;padding:0;margin:0;display:grid;gap:4px}
+.t-list button{width:100%;text-align:left;display:flex;gap:10px;align-items:center;background:none;border:0;font:inherit;font-size:15px;padding:9px 10px;border-radius:10px;color:var(--ink2);cursor:pointer}
+.t-list button:hover{background:var(--sunk)}
+.t-list button[aria-current="step"]{background:var(--brand-soft);color:var(--ink);font-weight:600}
+.t-list .n{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line2);font-size:13px;font-weight:600}
+.t-list .done .n{background:var(--brand);border-color:var(--brand);color:var(--btn-fg)}
+.lesson{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:34px clamp(20px,4vw,44px);box-shadow:var(--shadow)}
+.lesson[hidden]{display:none}
+.lesson .meta{font-size:14px;color:var(--mut);font-weight:600}
+.lesson h2{font-family:var(--serif);font-size:clamp(26px,3.4vw,36px);line-height:1.15;margin:8px 0 18px}
+.lesson h3{font-family:var(--serif);font-size:21px;margin:28px 0 10px}
+.lesson p,.lesson li{font-size:16.5px;line-height:1.7;color:var(--ink)}
+.lesson ul{padding-left:22px}
+.lesson li{margin-bottom:6px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+@media(max-width:700px){.vs{grid-template-columns:1fr}}
+.vs > div{border-radius:14px;padding:16px 18px;font-size:15.5px;line-height:1.6}
+.vs .bad{background:var(--bad-soft)}
+.vs .good{background:var(--brand-soft)}
+.vs b{display:block;font-size:13px;margin-bottom:6px;color:var(--mut)}
+.tpl{position:relative;margin:14px 0}
+.tpl pre{margin:0;white-space:pre-wrap;font-family:var(--sans);font-size:15.5px;line-height:1.65;background:var(--sunk);border:1px dashed var(--line2);border-radius:14px;padding:18px 18px 18px 18px;color:var(--ink)}
+.tpl .copy{position:absolute;top:10px;right:10px}
+.task{background:var(--sand);border-radius:14px;padding:18px 20px;margin:24px 0 8px}
+.task b{display:block;font-size:13px;color:var(--sand-ink);margin-bottom:6px}
+.task p{margin:0}
+.checks{margin:16px 0 0;display:grid;gap:8px}
+.checks label{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;cursor:pointer}
+.checks input{margin-top:4px;width:18px;height:18px;accent-color:var(--brand);flex:none}
+.l-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:30px;padding-top:22px;border-top:1px solid var(--line)}
+.qz{border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
+.qz > p{font-weight:600;margin:0 0 10px}
+.qz label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px;cursor:pointer;font-size:15.5px}
+.qz label:hover{background:var(--sunk)}
+.qz input{margin-top:4px;accent-color:var(--brand)}
+.qz .why{display:none;margin:10px 0 0;font-size:15px;padding:10px 12px;border-radius:10px}
+.qz.ok .why{display:block;background:var(--brand-soft)}
+.qz.no .why{display:block;background:var(--bad-soft)}
+.finish{text-align:center;padding:10px 0}
+.finish .big{font-family:var(--serif);font-size:56px;color:var(--brand);line-height:1}
+.small-note{font-size:13.5px;color:var(--mut);margin-top:18px}
+</style>
+</head>
+<body data-page="trial">
+<a class="skip" href="#main">К содержанию</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="page-hero" data-scene="page">
+    <div class="pl-head"><div class="container">
+      <nav class="crumbs" aria-label="Путь"><a href="index.html">Главная</a> / <a href="courses.html">Курсы</a> / Пробный курс</nav>
+      <h1>Первые шаги с ИИ</h1>
+      <p class="lead">Пять уроков по 5–7 минут. Бесплатно и без регистрации — прогресс сохранится в этом браузере.</p>
+    </div></div>
+  </section>
+
+  <section class="section" style="padding-top:44px">
+    <div class="container trial">
+      <aside class="t-side" aria-label="Уроки">
+        <b>Ваш прогресс</b>
+        <div class="t-prog" aria-hidden="true"><i id="t-bar"></i></div>
+        <ol class="t-list" id="t-list"></ol>
+        <p class="small-note">Подойдёт любой ИИ-ассистент. Без VPN работают, например, GigaChat и Алиса.</p>
+      </aside>
+
+      <div>
+        <!-- УРОК 1 -->
+        <article class="lesson" data-lesson="1" data-title="Что ИИ умеет, а что нет">
+          <span class="meta">Урок 1 из 5 · 5 минут</span>
+          <h2>Что ИИ умеет, а что нет</h2>
+          <p>ИИ-ассистент — это собеседник, который очень быстро пишет. Он не знает вашу компанию и ваших клиентов, но отлично работает с текстом, который вы ему даёте.</p>
+          <h3>В чём он силён</h3>
+          <ul>
+            <li>Пишет черновики: письма, объявления, ответы клиентам.</li>
+            <li>Сокращает и пересказывает: длинную переписку — в пять пунктов.</li>
+            <li>Объясняет сложное простыми словами и предлагает варианты.</li>
+            <li>Переделывает формат: текст — в таблицу, список — в письмо.</li>
+          </ul>
+          <h3>Где он ошибается</h3>
+          <ul>
+            <li>Уверенно придумывает факты, даты, номера статей и ссылки.</li>
+            <li>Путается в арифметике, особенно в длинных расчётах.</li>
+            <li>Не знает вашей ситуации, пока вы её не опишете.</li>
+          </ul>
+          <p>Отсюда главное правило курса: <b>ИИ делает черновик, а отвечаете за результат вы</b>. Под документом стоит ваша фамилия.</p>
+          <h3>Правило безопасности</h3>
+          <p>Не отправляйте в чат то, по чему можно узнать человека или компанию: ФИО, паспортные данные, ИНН, номера счетов, суммы конкретных договоров. Заменяйте их метками: «Клиент А», «Договор №1», «Сумма X».</p>
+          <div class="task"><b>Задание</b><p>Выпишите три задачи своей недели, где много текста: письма, протоколы, сводки, ответы на однотипные вопросы.</p></div>
+          <div class="checks">
+            <label><input type="checkbox" data-check="1a"> Выписал(а) три задачи</label>
+            <label><input type="checkbox" data-check="1b"> Отметил(а), где в них есть чужие данные, которые нужно будет заменить</label>
+          </div>
+        </article>
+
+        <!-- УРОК 2 -->
+        <article class="lesson" data-lesson="2" data-title="Ясная задача: четыре части" hidden>
+          <span class="meta">Урок 2 из 5 · 6 минут</span>
+          <h2>Ясная задача: четыре части запроса</h2>
+          <p>Короткий запрос даёт среднестатистический ответ. Чтобы ответ подошёл именно вам, опишите задачу так, как объясняли бы её толковому новому сотруднику.</p>
+          <ul>
+            <li><b>Роль</b> — кем модели себя считать: «Ты — опытный менеджер по работе с клиентами».</li>
+            <li><b>Задача</b> — что сделать, одним предложением.</li>
+            <li><b>Контекст</b> — что важно знать: кому, зачем, что уже было.</li>
+            <li><b>Формат</b> — как должен выглядеть ответ: длина, тон, таблица или список.</li>
+          </ul>
+          <div class="vs">
+            <div class="bad"><b>Так — средне</b>Напиши письмо клиенту про оплату.</div>
+            <div class="good"><b>Так — хорошо</b>Ты — вежливый менеджер по работе с клиентами. Напиши письмо Клиенту А, который задержал оплату на 10 дней. Мы хотим сохранить отношения, но получить оплату до пятницы. Тон дружелюбный и твёрдый, 5–7 строк, без канцелярита.</div>
+          </div>
+          <h3>Шаблон — скопируйте и заполните</h3>
+          <div class="tpl"><button class="btn sm ghost copy" type="button">Скопировать</button><pre>Ты — [роль].
+Задача: [что сделать одним предложением].
+Контекст: [кому, зачем, что важно, чего избегать].
+Формат ответа: [длина, тон, список или таблица].</pre></div>
+          <div class="task"><b>Задание</b><p>Возьмите одну задачу из урока 1. Спросите ИИ сначала коротко, потом — по шаблону. Сравните два ответа.</p></div>
+          <div class="checks">
+            <label><input type="checkbox" data-check="2a"> Составил(а) запрос по шаблону</label>
+            <label><input type="checkbox" data-check="2b"> Увидел(а) разницу между коротким и подробным запросом</label>
+          </div>
+        </article>
+
+        <!-- УРОК 3 -->
+        <article class="lesson" data-lesson="3" data-title="Пример и разметка" hidden>
+          <span class="meta">Урок 3 из 5 · 6 минут</span>
+          <h2>Покажите пример — и отделите материал</h2>
+          <p>Описать, «как надо», трудно. Показать — легко. Если у вас есть удачный образец, приложите его: модель повторит структуру и тон.</p>
+          <p>Второй приём — отделять инструкцию от материала. Когда в одном сообщении и просьба, и длинный текст, модель может перепутать, где что. Подпишите части.</p>
+          <h3>Шаблон: сводка совещания</h3>
+          <div class="tpl"><button class="btn sm ghost copy" type="button">Скопировать</button><pre>Сделай сводку совещания по образцу.
+
+ОБРАЗЕЦ:
+Решили: перенести сдачу отчёта на 15-е.
+Кто делает: Сотрудник Б — до 12-го.
+Открытые вопросы: бюджет на рекламу.
+
+ЗАМЕТКИ СОВЕЩАНИЯ:
+[вставьте свои заметки, заменив имена метками]</pre></div>
+          <p>Слова «ОБРАЗЕЦ» и «ЗАМЕТКИ» здесь работают как подписи на папках: модель видит, где пример формата, а где ваш материал.</p>
+          <div class="task"><b>Задание</b><p>Возьмите любой документ, который вы регулярно оформляете одинаково. Дайте ИИ один удачный образец и новые данные — пусть оформит по образцу.</p></div>
+          <div class="checks">
+            <label><input type="checkbox" data-check="3a"> Дал(а) модели образец</label>
+            <label><input type="checkbox" data-check="3b"> Подписал(а), где инструкция, а где материал</label>
+          </div>
+        </article>
+
+        <!-- УРОК 4 -->
+        <article class="lesson" data-lesson="4" data-title="По шагам и с уточнениями" hidden>
+          <span class="meta">Урок 4 из 5 · 5 минут</span>
+          <h2>Попросите думать по шагам — и уточнять</h2>
+          <p>С трудной задачей человек сначала прикидывает, что нужно учесть, и только потом отвечает. Модели это тоже помогает. Попросите её разложить задачу на шаги.</p>
+          <div class="tpl"><button class="btn sm ghost copy" type="button">Скопировать</button><pre>Сначала перечисли, что нужно учесть в этой задаче.
+Потом дай ответ.
+Если данных не хватает — задай мне до трёх вопросов, прежде чем отвечать.</pre></div>
+          <h3>Разговор, а не один запрос</h3>
+          <p>Первый ответ — это черновик. Доводите его короткими просьбами, как с коллегой:</p>
+          <ul>
+            <li>«Короче, в три предложения».</li>
+            <li>«Сделай таблицей: дата, сумма, ответственный».</li>
+            <li>«Убери пункт 3 и добавь срок оплаты».</li>
+            <li>«Перепиши проще — для человека не из нашей сферы».</li>
+          </ul>
+          <div class="task"><b>Задание</b><p>Дайте модели задачу посложнее — например, план разговора с недовольным клиентом. Попросите сначала перечислить, что учесть. Потом доведите ответ двумя-тремя уточнениями.</p></div>
+          <div class="checks">
+            <label><input type="checkbox" data-check="4a"> Попросил(а) разложить задачу на шаги</label>
+            <label><input type="checkbox" data-check="4b"> Довёл(а) ответ уточнениями</label>
+          </div>
+        </article>
+
+        <!-- УРОК 5 -->
+        <article class="lesson" data-lesson="5" data-title="Проверка — ваша работа" hidden>
+          <span class="meta">Урок 5 из 5 · 6 минут</span>
+          <h2>Проверка — ваша работа</h2>
+          <p>Умение проверить ответ ИИ — то, за что работодатель будет платить вам, а не модели. Три проверки ловят почти все ошибки.</p>
+          <ul>
+            <li><b>Числа.</b> Любую сумму и процент пересчитайте сами или в таблице.</li>
+            <li><b>Факты и ссылки.</b> Назван закон, статья, срок или исследование — откройте источник. Модели охотно их придумывают.</li>
+            <li><b>Полнота.</b> Спросите себя, чего в ответе нет. Модель не напомнит о том, о чём вы не спросили.</li>
+          </ul>
+          <p>Можно попросить модель саму указать слабые места: «Отметь, в чём ты не уверен». Это помогает, но окончательно проверяете всё равно вы.</p>
+          <h3>Удачный запрос — это ваш помощник</h3>
+          <p>Если запрос сработал, сохраните его в заметках. В следующий раз подставите новые данные — и сэкономите время снова. Так из отдельных запросов собирается личный набор помощников.</p>
+          <div class="task"><b>Задание</b><p>Дайте модели задачу с цифрами из вашей работы (заменив реальные данные). Проверьте ответ тремя проверками. Нашли ошибку — отлично, урок усвоен.</p></div>
+          <div class="checks">
+            <label><input type="checkbox" data-check="5a"> Проверил(а) числа, факты и полноту</label>
+            <label><input type="checkbox" data-check="5b"> Сохранил(а) удачный запрос как шаблон</label>
+          </div>
+        </article>
+
+        <!-- ИТОГ -->
+        <article class="lesson" data-lesson="6" data-title="Мини-тест" hidden>
+          <span class="meta">Итог · 3 вопроса</span>
+          <h2>Проверьте себя</h2>
+          <div class="qz" data-answer="b">
+            <p>1. Нужно сократить письмо коллеге. Какой запрос сработает лучше?</p>
+            <label><input type="radio" name="q1" value="a"> «Сократи»</label>
+            <label><input type="radio" name="q1" value="b"> «Сократи письмо ниже до 5 строк, сохрани сроки и суммы, тон деловой. Письмо: …»</label>
+            <label><input type="radio" name="q1" value="c"> «Сделай письмо лучше»</label>
+            <p class="why">Верный ответ — второй: в нём есть задача, условия и формат. Первый и третий оставляют модели гадать.</p>
+          </div>
+          <div class="qz" data-answer="b">
+            <p>2. Модель назвала номер статьи закона. Что делать?</p>
+            <label><input type="radio" name="q2" value="a"> Вставить в документ — модель же знает</label>
+            <label><input type="radio" name="q2" value="b"> Открыть закон и проверить статью</label>
+            <label><input type="radio" name="q2" value="c"> Спросить модель, уверена ли она, и вставить</label>
+            <p class="why">Верный ответ — проверить по первоисточнику. Модели часто придумывают номера статей, даже если «уверены».</p>
+          </div>
+          <div class="qz" data-answer="b">
+            <p>3. Можно ли отправить в чат договор с ФИО и реквизитами клиента?</p>
+            <label><input type="radio" name="q3" value="a"> Да, если сервис российский</label>
+            <label><input type="radio" name="q3" value="b"> Нет — сначала заменить данные метками</label>
+            <label><input type="radio" name="q3" value="c"> Да, если потом удалить переписку</label>
+            <p class="why">Верный ответ — заменить данные метками («Клиент А», «Договор №1»). Ответственность за чужие данные остаётся на вас.</p>
+          </div>
+          <div class="finish" id="t-finish" hidden>
+            <div class="big">✓</div>
+            <h3>Пробный курс пройден</h3>
+            <p>Дальше — выберите нейросеть и научитесь работать именно с ней. Короткий курс по каждой: кнопки, безопасность данных, готовые запросы.</p>
+            <div class="aic-grid" data-ai-courses style="text-align:left;margin:18px 0"></div>
+            <div class="row" style="justify-content:center;display:flex;gap:10px;flex-wrap:wrap">
+              <a class="btn ghost" href="tools.html">Сначала посмотреть тренажёр</a>
+              <a class="btn ghost" href="index.html#start">Проверить свою профессию</a>
+            </div>
+          </div>
+          <p class="small-note">Хотите глубже и не боитесь английского? Бесплатный интерактивный учебник по запросам от компании Anthropic: <a href="https://github.com/anthropics/prompt-eng-interactive-tutorial" target="_blank" rel="noopener">prompt-eng-interactive-tutorial</a>.</p>
+        </article>
+
+        <div class="l-nav" id="t-nav">
+          <button class="btn ghost" type="button" id="t-prev">← Назад</button>
+          <button class="btn" type="button" id="t-next">Урок пройден — дальше →</button>
+        </div>
+        <p class="small-note">Текст курса написан командой «Учи ИИ». Приёмы — общепринятая практика работы с ИИ-ассистентами; подробнее о ней — в открытых материалах Anthropic и в Prompt Engineering Guide от DAIR.AI.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/config.js"></script>
+<script src="data.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/trial.js"></script>
+</body>
+</html>

@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Учи ИИ — платформа, где вы научитесь работать с нейросетями</title>
+<meta name="description" content="Учи ИИ — онлайн-платформа: научитесь работать с DeepSeek, Qwen, Gemini и Claude на задачах из своей работы. Бесплатный пробный курс, тренажёр и разбор заданий.">
+<meta property="og:title" content="Учи ИИ — платформа, где вы научитесь работать с нейросетями">
+<meta property="og:description" content="Две минуты, без регистрации. Данные WEF, Microsoft Research и ВНИИ труда — со ссылками на первоисточники.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta name="theme-color" content="#F6F3EC">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="site.webmanifest">
+<script>(function(d){d.className+=' no-js';try{var t=localStorage.getItem('rz-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}var q=location.search+location.hash;if(/tgWebApp/.test(q))d.classList.add('in-tg')})(document.documentElement)</script>
+<script src="https://telegram.org/js/telegram-web-app.js" defer></script>
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+/* Цвета и шрифты — в assets/css/site.css. Здесь — только стили навигатора. */
+.wrap{max-width:720px;margin:0 auto;padding:0 18px calc(72px + env(safe-area-inset-bottom,0px))}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;margin:0}
+h1{font-size:clamp(28px,6.2vw,40px);letter-spacing:-.01em}
+h2{font-size:22px;margin-bottom:6px}
+h3{font-size:17px;font-family:var(--sans);font-weight:700}
+p{margin:0 0 14px}
+a{color:var(--brand)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:4px}
+.mut{color:var(--mut)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+[hidden]{display:none!important}
+
+/* Раскрывающиеся блоки */
+.expandable{margin-top:16px;border:1px solid var(--line);border-radius:var(--r);background:var(--card);overflow:hidden}
+.expand-btn{width:100%;text-align:left;background:none;border:none;padding:14px 18px;font:inherit;font-size:15px;font-weight:600;color:var(--brand);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.expand-btn:hover{background:var(--sunk);color:var(--ink)}
+.expand-btn .arrow{transition:transform 0.2s}
+.expandable.open .expand-btn .arrow{transform:rotate(180deg)}
+.expand-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
+.expandable.open .expand-content{max-height:800px}
+.expand-inner{padding:0 18px 18px;color:var(--ink2);font-size:15px;line-height:1.7}
+
+header.hd{padding:34px 0 18px}
+.brand{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.lead{font-size:18px;color:var(--ink2);margin:12px 0 0;max-width:40ch}
+.badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.badge{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;padding:5px 10px;border:1px solid var(--line2);border-radius:999px;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin:16px 0}
+.step{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+input[type=text]{width:100%;font:inherit;font-size:17px;padding:13px 14px;border:1px solid var(--line2);border-radius:var(--r);background:var(--card);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.chip{font:inherit;font-size:14px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink2);cursor:pointer}
+.chip:hover{border-color:var(--brand);color:var(--brand)}
+.list{margin-top:10px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.list button{display:block;width:100%;text-align:left;font:inherit;font-size:15.5px;padding:12px 14px;background:var(--card);border:0;border-top:1px solid var(--line);color:var(--ink);cursor:pointer}
+.list button:first-child{border-top:0}
+.list button:hover{background:var(--sunk)}
+/* кнопки .btn — общие, в site.css */
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.score{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.score .num{font-family:var(--serif);font-size:56px;font-weight:700;line-height:1}
+.score .band{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+.b-low{background:var(--brand-soft);color:var(--brand)}
+.b-mid{background:var(--warn-soft);color:var(--warn)}
+.b-high{background:var(--bad-soft);color:var(--bad)}
+.meter{height:9px;background:var(--sunk);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:14px 0 6px}
+.meter i{display:block;height:100%;background:var(--brand)}
+.meter.mid i{background:var(--warn)} .meter.high i{background:var(--bad)}
+.kv{border-top:1px solid var(--line);padding:11px 0;display:flex;gap:14px;justify-content:space-between;align-items:baseline}
+.kv:first-of-type{border-top:0}
+.kv .k{color:var(--ink2);font-size:15px}
+.kv .v{font-family:var(--mono);font-size:14.5px;white-space:nowrap;text-align:right}
+.note{border-left:3px solid var(--line2);background:var(--sunk);padding:13px 16px;border-radius:0 var(--r) var(--r) 0;margin:14px 0;font-size:14.5px;color:var(--ink2)}
+.note.warn{border-left-color:var(--warn);background:var(--warn-soft)}
+.note b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:5px}
+.note p:last-child{margin-bottom:0}
+.slider{margin:16px 0}
+.slider label{display:flex;justify-content:space-between;gap:12px;font-size:15px;margin-bottom:6px}
+.slider label span:last-child{font-family:var(--mono);font-size:13px;color:var(--mut)}
+input[type=range]{width:100%;accent-color:var(--brand)}
+.fork{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:620px){.fork{grid-template-columns:1fr 1fr}}
+.path{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:18px;cursor:pointer;text-align:left;font:inherit;color:var(--ink)}
+.path:hover{border-color:var(--brand)}
+.path .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:7px}
+.path h3{margin-bottom:6px}
+.path p{font-size:14.5px;color:var(--ink2);margin:0}
+.path .term{font-family:var(--mono);font-size:12.5px;color:var(--brand);margin-top:10px;display:block}
+.route{border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:18px;margin-bottom:12px}
+.route .top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.route h3{font-size:17px;margin-bottom:4px}
+.fit{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--brand);line-height:1;white-space:nowrap}
+.fit small{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:400;margin-top:3px}
+.gap{margin-top:12px;font-size:14.5px;color:var(--ink2)}
+.gap b{color:var(--ink)}
+.why{margin-top:10px;font-size:14px;color:var(--mut)}
+.bar{height:6px;background:var(--sunk);border-radius:999px;overflow:hidden;margin:10px 0 2px}
+.bar i{display:block;height:100%;background:var(--brand)}
+.plan{counter-reset:w}
+.week{display:grid;grid-template-columns:40px 1fr;gap:0 14px;padding:14px 0;border-top:1px solid var(--line)}
+.week:first-child{border-top:0}
+.week .n{font-family:var(--mono);font-size:12px;color:var(--mut);padding-top:3px}
+.week h3{font-size:15.5px;margin-bottom:3px}
+.week p{font-size:14.5px;color:var(--ink2);margin:0}
+.week .src{font-size:13px;margin-top:6px}
+.offer{border:2px solid var(--brand);border-radius:var(--r);background:var(--brand-soft);padding:20px;margin:20px 0}
+.offer h3{font-family:var(--serif);font-size:20px;margin-bottom:8px}
+.price{font-family:var(--mono);font-size:15px;color:var(--brand);font-weight:700;margin:10px 0}
+ul.tick{list-style:none;padding:0;margin:12px 0}
+ul.tick li{padding-left:24px;position:relative;margin-bottom:7px;font-size:15px}
+ul.tick li::before{content:'✓';position:absolute;left:0;color:var(--brand);font-weight:700}
+.src-footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:13.5px;color:var(--mut)}
+.src-footer ul{padding-left:18px;margin:8px 0}
+.src-footer li{margin-bottom:5px}
+.share{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px}
+
+/* навигатор на главной: карточки чуть заметнее на фоне в клетку */
+.wrap .card{box-shadow:var(--shadow);border-radius:16px;padding:24px}
+.nav-anchor{position:relative;top:calc(-1 * var(--hdr))}
+.wrap .card h2{font-size:24px}
+.in-tg .wrap{padding-top:8px}
+</style>
+</head>
+<body data-page="index">
+<a class="skip" href="#start">Перейти к навигатору</a>
+<!-- Шапка и меню рисует assets/js/site.js (правится в одном месте для всех страниц) -->
+<div id="site-header"></div>
+
+<!-- ГЛАВНЫЙ ЭКРАН: многослойное ночное небо. Слои (небо, звёзды, луна, облака) рисует
+     assets/js/site.js, они идут за курсором и прокруткой; здесь — только текст. -->
+<section class="hero hero-split tg-hide" data-scene="hero" aria-labelledby="hero-title">
+  <div class="pl-head">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <a class="eyebrow" href="tools.html#chat"><span class="eb-dot" aria-hidden="true"></span>Новое: чат с нейросетями прямо на сайте <span aria-hidden="true">→</span></a>
+        <h1 id="hero-title">Учи ИИ — платформа, где вы научитесь <span class="accent">работать с&nbsp;нейросетями</span></h1>
+        <p class="lead">DeepSeek, Qwen, Gemini и Claude — на задачах из вашей работы. Короткие уроки, интерактивный тренажёр и чат, где можно сразу попробовать.</p>
+        <div class="cta">
+          <a class="btn btn-glow" href="trial.html">Начать бесплатно <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn ghost" href="tools.html#chat">Открыть чат с ИИ</a>
+        </div>
+        <div class="hero-trust">
+          <span class="ai-logos"><img src="assets/img/ai/deepseek.svg" alt="" width="18" height="18"><img src="assets/img/ai/qwen.svg" alt="" width="18" height="18"><img src="assets/img/ai/gemini.svg" alt="" width="18" height="18"><img src="assets/img/ai/claude.svg" alt="" width="18" height="18"></span>
+          <span><b>4 нейросети в одном курсе</b><small>Пробный курс бесплатно · оплата картой и СБП · без автопродления</small></span>
+        </div>
+      </div>
+      <div class="hero-demo" aria-hidden="true">
+        <div class="hd-win">
+          <div class="hd-top">
+            <span class="hd-tab on"><img src="assets/img/ai/deepseek.svg" alt="" width="16" height="16">DeepSeek</span>
+            <span class="hd-tab"><img src="assets/img/ai/qwen.svg" alt="" width="16" height="16">Qwen</span>
+            <span class="hd-tab"><img src="assets/img/ai/gemma.svg" alt="" width="16" height="16">Gemma</span>
+          </div>
+          <div class="hd-body">
+            <div class="hd-msg me">Сравни два варианта графика отпусков. Условие: на месте всегда не меньше 4 человек.</div>
+            <div class="hd-msg ai"><span class="hd-type" data-text="Лучше вариант 2 — в нём на месте всегда 4–5 человек.
+В варианте 1 с 12 по 16 июля остаются трое: условие нарушено.
+Исправленный график — таблицей ниже."></span><i class="hd-caret"></i></div>
+          </div>
+          <div class="hd-input"><span>Напишите задачу…</span><i>↑</i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ДВЕ ДОРОГИ: история с фото и переключателем — одна дорога на экране за раз -->
+<section class="section home-feat tg-hide" id="features">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="kicker">Платформа</span>
+      <h2 class="section-title">Всё для работы с ИИ — в одном месте</h2>
+      <p class="section-lead">Учитесь, тренируйтесь на живой нейросети и выбирайте, куда расти дальше.</p>
+    </div>
+    <div class="bento">
+      <a class="bx bx-courses reveal" href="courses.html#ai">
+        <div class="bx-vis"><span class="bx-logos"><img src="assets/img/ai/deepseek.svg" alt="" width="22" height="22"><img src="assets/img/ai/qwen.svg" alt="" width="22" height="22"><img src="assets/img/ai/gemini.svg" alt="" width="22" height="22"><img src="assets/img/ai/claude.svg" alt="" width="22" height="22"></span></div>
+        <b>Курсы по нейросетям</b>
+        <p>DeepSeek, Qwen, Gemini и Claude: где какие кнопки, что им можно доверить, готовые запросы.</p>
+        <span class="bx-go">От 990 ₽ →</span>
+      </a>
+      <a class="bx bx-chat reveal" data-delay="1" href="tools.html#chat">
+        <div class="bx-vis"><span class="bx-msg me">Проверь письмо клиенту</span><span class="bx-msg ai">Две правки: убрать «срочно» и добавить срок ответа.</span></div>
+        <b>Чат с ИИ на сайте</b>
+        <p>Прошли урок — сразу пробуйте на живой нейросети. Есть бесплатная модель.</p>
+        <span class="bx-go">Открыть чат →</span>
+      </a>
+      <a class="bx bx-tools reveal" data-delay="2" href="tools.html">
+        <div class="bx-vis"><span class="bx-light ok">Можно</span><span class="bx-light fix">Убрать данные</span><span class="bx-light no">Нельзя</span></div>
+        <b>Тренажёр</b>
+        <p>Тур по кнопкам, светофор данных, конструктор запроса и тест.</p>
+        <span class="bx-go">Попробовать →</span>
+      </a>
+      <a class="bx bx-career reveal" href="career.html">
+        <div class="bx-vis"><span class="bx-ring" style="--p:81"><b>81%</b></span><span class="bx-ringt">Бизнес-аналитик<small>уже есть 5 навыков из 7</small></span></div>
+        <b>Подбор профессии</b>
+        <p>Три шага — и 30 направлений по порядку: что у вас уже есть и чему учиться.</p>
+        <span class="bx-go">Подобрать →</span>
+      </a>
+      <a class="bx bx-ml reveal" data-delay="1" href="ml.html">
+        <div class="bx-vis"><code>model = AutoModel.from_pretrained(…)</code><code>trainer.train()</code></div>
+        <b>ML для продвинутых</b>
+        <p>Как устроены модели, где брать датасеты и как дообучить свою. Бесплатно.</p>
+        <span class="bx-go">Начать курс →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section tight tg-hide" id="how">
+  <div class="container">
+    <div class="section-head center reveal"><h2 class="section-title">Как это работает</h2></div>
+    <ol class="how reveal">
+      <li><span>1</span><b>Пробный курс</b><p>Пять уроков по 5 минут: как ставить задачу и проверять ответ. Бесплатно и без регистрации.</p></li>
+      <li><span>2</span><b>Курс по своей нейросети</b><p>Кнопки, безопасность данных, секретные слова и задания из вашей работы.</p></li>
+      <li><span>3</span><b>Практика в чате</b><p>Пробуете сразу на сайте, а за разбором работ — в Telegram-бот.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section home-courses" id="ai-courses">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Курсы по нейросетям</span>
+      <h2 class="section-title">Выберите нейросеть</h2>
+      <p class="section-lead">Короткий курс по каждой: кнопки, безопасность данных, готовые запросы. <a href="tools.html">Как это устроено →</a></p>
+    </div>
+    <div class="aic-grid" data-ai-courses></div>
+  </div>
+</section>
+
+<section class="section tg-hide" id="fork" style="padding-top:36px">
+  <div class="container">
+    <div class="section-head center reveal">
+      <h2 class="section-title">Две дороги</h2>
+      <p class="section-lead">Переключайте — и смотрите, что изменится.</p>
+    </div>
+    <div class="story reveal" data-story data-active="a">
+      <figure class="story-photo">
+        <picture>
+          <source media="(max-width:760px)" srcset="assets/img/story-olga-m.webp">
+          <img src="assets/img/story-olga.webp" alt="Женщина — иллюстрация к примеру" loading="lazy" decoding="async">
+        </picture>
+        <figcaption><b>Ольга, 41</b><span>бухгалтер</span></figcaption>
+        <span class="story-badge" data-badge-a>Осталась в профессии</span>
+        <span class="story-badge b" data-badge-b hidden>Сменила профессию</span>
+      </figure>
+      <div class="story-body">
+        <div class="seg" role="tablist" aria-label="Выбор дороги">
+          <button type="button" role="tab" id="road-tab-a" aria-controls="road-a" aria-selected="true" data-road="a">Дорога A<small>пользоваться ИИ</small></button>
+          <button type="button" role="tab" id="road-tab-b" aria-controls="road-b" aria-selected="false" tabindex="-1" data-road="b">Дорога Б<small>профессия в ИИ</small></button>
+        </div>
+        <div class="road" id="road-a" role="tabpanel" aria-labelledby="road-tab-a" data-panel="a">
+          <div class="when"><b>4</b><span>недели</span></div>
+          <p class="headline">Рутину делает ИИ-помощник. Она проверяет и подписывает.</p>
+          <ul class="flags"><li class="ok">Та же работа</li><li class="ok">Риск низкий</li><li>≈ час в неделю</li></ul>
+          <ol class="steps-line"><li>Данные</li><li>Запросы</li><li>Проверка</li><li>Помощник</li></ol>
+          <a class="btn" href="courses.html#use">Курсы дороги A</a>
+        </div>
+        <div class="road" id="road-b" role="tabpanel" aria-labelledby="road-tab-b" data-panel="b" hidden>
+          <div class="when"><b>4–6</b><span>месяцев</span></div>
+          <p class="headline">Новая работа — младший аналитик данных.</p>
+          <ul class="flags"><li class="warn">Новая работа</li><li class="warn">Риск выше</li><li>несколько часов в неделю</li></ul>
+          <ol class="steps-line"><li>SQL</li><li>Статистика</li><li>Дашборды</li><li>Портфолио</li><li>Отклики</li></ol>
+          <a class="btn" href="career.html">Подобрать профессию</a>
+        </div>
+      </div>
+    </div>
+    <p class="compare-note center">Пример: Ольга — собирательный образ. Фото с фотостока, человек на нём с проектом не связан.</p>
+  </div>
+</section>
+
+<div class="wrap">
+<span id="start"></span>
+
+<!-- ЭКРАН 1: выбор профессии (оригинал) -->
+<section id="s1" class="card">
+<div class="step">Шаг 1 из 5</div>
+<h2>Кем вы работаете?</h2>
+<p class="mut" style="font-size:14.5px">Начните печатать или выберите из списка.</p>
+<input type="text" id="q" placeholder="например, бухгалтер" autocomplete="off" aria-label="Ваша профессия">
+<div class="list" id="hits" hidden></div>
+<div class="chips" id="chips"></div>
+</section>
+
+<!-- ЭКРАН 2: оценка (оригинал) -->
+<section id="s2" class="card" hidden>
+<div class="step">Шаг 2 из 5 — диагноз</div>
+<h2 id="p-name"></h2>
+<div class="score" style="margin-top:14px">
+<div class="num mono" id="p-score" role="status" aria-live="polite">—</div>
+<div class="band" id="p-band">—</div>
+</div>
+<div class="meter" id="p-meter"><i style="width:0"></i></div>
+<p class="mut mono" style="font-size:12.5px;margin:0">Ориентир, а не измерение. Как он считается — раскрыто ниже</p>
+<div style="margin-top:18px">
+<div class="kv"><span class="k">Прогноз WEF по профессии, 2025–2030</span><span class="v" id="p-wef"></span></div>
+<div class="kv"><span class="k">Место в топ-15 сокращающихся</span><span class="v" id="p-rank"></span></div>
+<div class="kv"><span class="k">ВНИИ труда при Минтруде, группа «служащие»</span><span class="v">риск замещения 82%</span></div>
+<div class="kv"><span class="k">hh.ru: вакансии с ИИ-навыками</span><span class="v">×2,7 за год, +11% к зарплате</span></div>
+</div>
+<h3 style="margin-top:22px">Уточните под себя</h3>
+<p class="mut" style="font-size:14.5px">Средний балл по профессии мало что говорит лично о вас. Передвиньте ползунки так, чтобы они отражали вес каждой части в вашей неделе — важны пропорции между ними, а не сумма.</p>
+<div class="slider"><label for="r-rout"><span>Рутина с документами и таблицами</span><span id="v-rout">40</span></label>
+<input type="range" id="r-rout" min="0" max="100" value="40"></div>
+<div class="slider"><label for="r-ppl"><span>Живое общение и переговоры</span><span id="v-ppl">20</span></label>
+<input type="range" id="r-ppl" min="0" max="100" value="20"></div>
+<div class="slider"><label for="r-resp"><span>Решения, за которые вы лично отвечаете</span><span id="v-resp">20</span></label>
+<input type="range" id="r-resp" min="0" max="100" value="20"></div>
+<div class="slider"><label for="r-hard"><span>Нестандартные задачи и разбор сложных случаев</span><span id="v-hard">20</span></label>
+<input type="range" id="r-hard" min="0" max="100" value="20"></div>
+<div class="note warn">
+<b>Как считается это число и почему ему нельзя верить как измерению</b>
+<p>За основу берётся прогноз WEF по вашей профессии, дальше он сдвигается вашими ответами: доля рутины повышает оценку, доля личной ответственности и живого общения понижает. <b>Это наша собственная шкала, а не показатель из исследования.</b> Мы придумали её, чтобы разговор был о вашей работе, а не о средней по больнице.</p>
+<p>И более общее: такие прогнозы сбываются плохо. Оценка «47% профессий исчезнут» (2013) не подтвердилась — экономика США с тех пор создала 16 млн рабочих мест, а корреляция прогноза с реальностью составила 0,26. Это ориентир для размышления, а не приговор.</p>
+</div>
+<div class="row"><button class="btn" id="to3">Дальше — что с этим делать</button></div>
+</section>
+
+<!-- ЭКРАН 3: развилка (оригинал) -->
+<section id="s3" class="card" hidden>
+<div class="step">Шаг 3 из 5 — развилка</div>
+<h2>У вас две дороги</h2>
+<p class="mut" style="font-size:14.5px">Первая короче и почти всегда реалистичнее. Вторая длиннее, но меняет профессию.</p>
+<div class="fork">
+<button class="path" data-path="boost">
+<span class="tag">Дорога A · короткая</span>
+<h3>Усилить свою профессию</h3>
+<p>Остаётесь тем, кто вы есть. ИИ забирает рутину, вы забираете обратно 8–12 часов в неделю и становитесь тем, кого в вакансиях ищут с надбавкой.</p>
+<span class="term">4 недели</span>
+</button>
+<button class="path" data-path="move">
+<span class="tag">Дорога Б · длинная</span>
+<h3>Перейти в смежную профессию</h3>
+<p>Семь направлений, где ваш опыт засчитывается. Честно: вход дольше и труднее, чем обещают курсы.</p>
+<span class="term">от 2 месяцев</span>
+</button>
+</div>
+<div class="row"><button class="btn ghost" id="back2">← Уточнить оценку</button></div>
+<div class="note">
+<b>Что говорят данные</b>
+<p>PwC: роли, где ИИ забирает рутину, а человек усиливается экспертизой, растут вдвое быстрее рынка и дают прирост зарплат на 42% быстрее. При этом Brookings показала, что государственные программы переобучения в США не дали значимого прироста заработка за 30 месяцев. Поэтому дорога A стоит первой, а не второй.</p>
+</div>
+</section>
+
+<!-- ЭКРАН 4: маршруты (оригинал) -->
+<section id="s4" class="card" hidden>
+<div class="step">Шаг 4 из 5 — маршруты</div>
+<h2 id="s4-title">Ваши маршруты</h2>
+<p class="mut" style="font-size:14.5px" id="s4-sub"></p>
+<div id="routes"></div>
+<div class="note" id="ms-note" hidden>
+<b>О балле ИИ</b>
+<p>Балл взят из открытого датасета Microsoft Research: он показывает, <b>насколько ИИ уже применяется</b> в профессии, и измерен на диалогах пользователей в США за 2024 год. Авторы отдельно предупреждают, что его нельзя трактовать как способность ИИ заменить профессию. Мы приводим его как справку, а не как прогноз по российскому рынку.</p>
+</div>
+<div class="row"><button class="btn ghost" id="back3">← Другая дорога</button></div>
+</section>
+
+<!-- ЭКРАН 5: план (оригинал) -->
+<section id="s5" class="card" hidden>
+<div class="step">Шаг 5 из 5 — план</div>
+<h2 id="plan-title"></h2>
+<p class="mut" style="font-size:14.5px">Первые четыре недели. Материал — открытые источники под свободными лицензиями, их можно изучать бесплатно.</p>
+<div class="plan" id="plan"></div>
+<div class="offer">
+<h3>Пройти это не одному</h3>
+<p style="font-size:15px;margin-bottom:4px">Весь материал открыт и бесплатен — мы на нём не зарабатываем. Платят у нас за то, чего в бесплатном материале нет:</p>
+<ul class="tick">
+<li>ИИ разбирает каждую вашу работу: что сделано верно и что переписать, с примерами</li>
+<li>Напоминание, если вы остановились — на этом месте останавливаются почти все</li>
+<li>Итоговая работа с замером: сколько минут задача занимала до и сколько после</li>
+</ul>
+<p style="font-size:13.5px;color:var(--ink2);margin:0 0 10px">Три пункта, и все три работают сегодня. Сертификата и закрытого чата у нас пока нет — появятся, скажем отдельно.</p>
+<div class="price">2 490 ₽ в месяц · первые 7 дней бесплатно · автопродления нет</div>
+<p style="font-size:13px;margin:0 0 10px"><a href="offer.html" target="_blank" rel="noopener">Оферта</a> · <a href="privacy.html" target="_blank" rel="noopener">Политика обработки данных</a></p>
+<p style="font-size:13.5px;color:var(--ink2);margin-bottom:14px">Деньги не спишутся сами: автопродления нет, за два дня до конца доступа бот пришлёт ссылку, и вы решите. Многие проводят оплату через бюджет работодателя — сумма ниже порога, который согласуют без начальства.</p>
+<div id="lead">
+<input type="text" id="contact" placeholder="Telegram @ник или почта" aria-label="Контакт для плана">
+<label style="display:flex;gap:9px;align-items:flex-start;margin-top:12px;font-size:13.5px;color:var(--ink2)">
+<input type="checkbox" id="agree" style="margin-top:3px;flex:none">
+<span>Согласен на обработку контакта, чтобы получить план. <a href="privacy.html" target="_blank" rel="noopener">Политика обработки данных</a></span>
+</label>
+<div class="row"><button class="btn wide" id="send">Прислать план и открыть первую неделю</button></div>
+<p class="mut" style="font-size:12.5px;margin-top:10px">Просим только контакт. Ни возраст, ни зарплату, ни место работы мы не собираем и не храним.</p>
+</div>
+<div id="done" hidden>
+<p style="margin:0"><b>Готово.</b> План уходит вам в течение минуты.</p>
+</div>
+</div>
+<div class="share">
+<button class="btn ghost" id="share">Поделиться результатом</button>
+<button class="btn ghost" id="back4">← Другой маршрут</button>
+</div>
+</section>
+
+</div><!-- /.wrap навигатора -->
+
+<!-- ОТЗЫВЫ: только настоящие, из базы. Пока опубликованных нет — блок скрыт -->
+<section class="section tg-hide" id="reviews" hidden>
+  <div class="container">
+    <div class="section-head reveal"><h2 class="section-title">Что говорят ученики</h2></div>
+    <div class="reviews" data-reviews></div>
+  </div>
+</section>
+
+<!-- ПОЛОСА-ЦИТАТА -->
+
+
+<section class="section tight tg-hide">
+  <div class="container">
+    <ul class="principles reveal" aria-label="Наши правила">
+      <li><b>Источник</b> у каждого числа</li>
+      <li><b>Основа</b> бесплатна</li>
+      <li><b>Без</b> автопродления</li>
+      <li><b>Без</b> громких обещаний</li>
+    </ul>
+  </div>
+</section>
+
+<!-- НАЧАТЬ С ПРОБНОГО КУРСА -->
+<section class="section tight tg-hide">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div>
+        <h2>Начните с бесплатного пробного курса</h2>
+        <p>Пять коротких уроков о том, как разговаривать с ИИ. Без регистрации.</p>
+      </div>
+      <div class="actions">
+        <a class="btn light" href="trial.html">Начать <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="pricing.html">Тарифы</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Подвал рисует assets/js/site.js -->
+<div id="site-footer"></div>
+
+<!-- Все адреса (бот, сервер, поддержка) — в assets/js/config.js -->
+<script src="assets/js/config.js"></script>
+<script src="data.js"></script>
+<script>
+(function(){
+'use strict';
+var TG = null;
+function bindTG(){
+TG = (window.Telegram && window.Telegram.WebApp) ? window.Telegram.WebApp : null;
+if (TG) { try { TG.ready(); TG.expand(); } catch(e){} }
+// Внутри Telegram показываем только навигатор: шапка, герой и подвал там лишние
+if (TG && TG.initData) document.documentElement.classList.add('in-tg');
+}
+bindTG();
+window.addEventListener('load', bindTG);
+var $ = function(id){ return document.getElementById(id); };
+var state = { prof:null, path:null, target:null, score:0 };
+
+/* ---------- ОРИГИНАЛЬНЫЙ КОД ВЫБОРА ПРОФЕССИИ ---------- */
+var chips = $('chips');
+['acc','sec','bank','legal','tele','data'].forEach(function(id){
+var p = PROFS.find(function(x){return x.id===id;});
+if(!p) return;
+var b = document.createElement('button');
+b.className='chip'; b.type='button'; b.textContent = p.name.split(',')[0];
+b.onclick = function(){ pick(p); };
+chips.appendChild(b);
+});
+
+var q = $('q'), hits = $('hits');
+q.addEventListener('input', function(){
+var v = q.value.trim().toLowerCase();
+hits.innerHTML='';
+if (v.length < 2){ hits.hidden = true; return; }
+var found = PROFS.filter(function(p){ return p.name.toLowerCase().indexOf(v) >= 0; });
+if (!found.length){
+hits.innerHTML = '';
+var b = document.createElement('button');
+b.type = 'button';
+b.innerHTML = '<b>Вашей профессии пока нет в списке</b><br>' +
+'<span style="color:var(--mut);font-size:13.5px">Мы начали с двенадцати, по которым есть прогноз WEF. ' +
+'Нажмите — оставьте профессию и контакт, добавим её и напишем вам.</span>';
+b.onclick = function(){ missing(q.value.trim()); };
+hits.appendChild(b); hits.hidden = false; return;
+}
+found.forEach(function(p){
+var b=document.createElement('button'); b.type='button'; b.textContent=p.name;
+b.onclick=function(){ pick(p); };
+hits.appendChild(b);
+});
+hits.hidden = false;
+});
+
+function missing(name){
+state.prof = null; state.missing = name;
+hits.hidden = true;
+$('plan-title').textContent = 'Профессия «' + name + '» — пока не в списке';
+$('plan').innerHTML = '<div class="week"><div class="n">что<br>дальше</div><div>' +
+'<h3>Мы добавим её</h3><p>Оставьте контакт — напишем, когда профессия появится. ' +
+'А пока четыре урока дороги «усилить свою профессию» подходят почти любой офисной работе ' +
+'и открыты бесплатно.</p></div></div>';
+show('s5');
+}
+
+function pick(p){
+state.prof = p;
+hits.hidden = true; q.value = p.name;
+$('p-name').textContent = p.name;
+$('p-wef').textContent = '−' + p.drop + '%';
+$('p-rank').textContent = '№' + p.rank + ' из 15';
+recalc();
+show('s2');
+}
+
+/* ---------- экран 2: персональный балл ---------- */
+var R = { rout:$('r-rout'), ppl:$('r-ppl'), resp:$('r-resp'), hard:$('r-hard') };
+var V = { rout:$('v-rout'), ppl:$('v-ppl'), resp:$('v-resp'), hard:$('v-hard') };
+Object.keys(R).forEach(function(k){
+R[k].addEventListener('input', function(){ V[k].textContent = R[k].value + '%'; recalc(); });
+});
+
+function recalc(){
+if (!state.prof) return;
+var rout = +R.rout.value, ppl = +R.ppl.value, resp = +R.resp.value, hard = +R.hard.value;
+var sum = rout + ppl + resp + hard || 1;
+rout = rout/sum; ppl = ppl/sum; resp = resp/sum; hard = hard/sum;
+var base = state.prof.drop * 2;
+var s = base * (0.55 + 0.9*rout + 0.15*hard) - 100*(0.28*resp + 0.18*ppl);
+s = Math.max(5, Math.min(95, Math.round(s)));
+state.score = s;
+$('p-score').textContent = s;
+var band = $('p-band'), meter = $('p-meter');
+band.className = 'band ' + (s>=60?'b-high':s>=35?'b-mid':'b-low');
+band.textContent = s>=60?'высокое пересечение':s>=35?'среднее пересечение':'низкое пересечение';
+meter.className = 'meter ' + (s>=60?'high':s>=35?'mid':'');
+meter.firstElementChild.style.width = s + '%';
+}
+
+$('to3').onclick = function(){ show('s3'); };
+
+/* ---------- экран 3 ---------- */
+Array.prototype.forEach.call(document.querySelectorAll('.path'), function(btn){
+btn.onclick = function(){ state.path = btn.dataset.path; routes(); show('s4'); };
+});
+$('back3').onclick = function(){ show('s3'); };
+$('back2').onclick = function(){ show('s2'); };
+$('back4').onclick = function(){ show('s4'); };
+
+/* ---------- экран 4: маршруты ---------- */
+function transferable(target){
+var teach = target.teaches || [];
+return target.skills.filter(function(s){ return teach.indexOf(s) < 0; });
+}
+
+function fit(prof, target){
+var have = 0;
+target.skills.forEach(function(s){ if (prof.skills.indexOf(s) >= 0) have++; });
+return Math.round(have / target.skills.length * 100);
+}
+
+function fitTransferable(prof, target){
+var base = transferable(target);
+if (!base.length) return 100;
+var have = 0;
+base.forEach(function(s){ if (prof.skills.indexOf(s) >= 0) have++; });
+return Math.round(have / base.length * 100);
+}
+
+function gapOf(prof, target){
+return transferable(target).filter(function(s){ return prof.skills.indexOf(s) < 0; })
+.map(function(s){ return SKILLS[s]; });
+}
+
+function learnOf(target){
+return (target.teaches || []).map(function(s){ return SKILLS[s]; });
+}
+
+function routes(){
+var box = $('routes'); box.innerHTML = '';
+var list = TARGETS.filter(function(t){ return t.type === state.path; });
+list = list.map(function(t){
+var ft = fitTransferable(state.prof, t);
+return { t:t, f:fit(state.prof, t), ft:ft,
+rank: ft * (1 - 0.04 * (t.months || 6)) };
+}).sort(function(a,b){ return b.rank - a.rank; });
+
+var best = list.length ? Math.max.apply(null, list.map(function(o){ return o.ft; })) : 0;
+$('s4-title').textContent = state.path === 'boost' ? 'Дорога A: усилить свою профессию' : 'Дорога Б: куда можно перейти';
+$('s4-sub').textContent = state.path === 'boost'
+? 'Один маршрут, четыре недели. Вы остаётесь в своей профессии.'
+: 'Процент — доля навыков цели, которые у вас уже есть. Сортировка по нему же, никаких скрытых поправок. Срок обучения и спрос указаны на каждой карточке: взвесьте их сами.';
+
+if (state.path === 'move' && best < 45){
+var warn = document.createElement('div');
+warn.className = 'note warn';
+warn.innerHTML = '<b>Скажем прямо</b><p>Лучшее совпадение с вашим опытом — ' + best + '%. ' +
+'Это значит, что переход для вас будет не месяцами, а годом и больше, и начинать придётся почти с нуля. ' +
+'Мы честно советуем <b>дорогу A</b>: усилить ту профессию, что уже есть. Маршруты ниже показываем полностью, ' +
+'но не делаем вид, что они близко.</p>';
+box.appendChild(warn);
+}
+
+list.forEach(function(o){
+var t = o.t, g = gapOf(state.prof, t);
+var el = document.createElement('div'); el.className = 'route';
+var html = t.type === 'boost'
+? '<div class="top"><div><h3>'+esc(t.name)+'</h3>'+
+'<div class="mono" style="font-size:12.5px;color:var(--mut)">учиться '+esc(t.term)+'</div></div></div>'
+: '<div class="top"><div><h3>'+esc(t.name)+'</h3>'+
+'<div class="mono" style="font-size:12.5px;color:var(--mut)">учиться '+esc(t.term)+
+(t.ms!==null ? ' · балл ИИ '+String(t.ms).replace('.',',')+' при медиане '+String(MS_MEDIAN).replace('.',',') : '')+'</div></div>'+
+'<div class="fit">'+o.ft+'%<small>ваш опыт</small></div></div>'+
+((t.months || 0) >= 9 ? '<div class="why" style="color:var(--warn)">Самый длинный путь в списке: год учёбы и вход почти с нуля.</div>' : '')+
+'<div class="bar"><i style="width:'+o.f+'%"></i></div>';
+
+if (t.type === 'boost'){
+var learnB = learnOf(t);
+if (learnB.length) html += '<div class="gap"><b>Чему научим:</b> ' + esc(learnB.join(', ')) + '</div>';
+} else {
+html += '<div class="gap"><b>Что принести с собой:</b> ' + (g.length ? esc(g.join(', ')) : 'ничего — этот опыт у вас уже есть') + '</div>';
+var learn = learnOf(t);
+if (learn.length) html += '<div class="gap"><b>Чему научим:</b> ' + esc(learn.join(', ')) + '</div>';
+}
+
+if (t.demandLabel) html += '<div class="why"><b style="color:var(--brand)">Спрос подтверждён:</b> ' + esc(t.demandLabel) + '</div>';
+else html += '<div class="why">Отдельных данных о росте спроса по этой профессии у нас нет — не выдумываем.</div>';
+html += '<div class="why">' + esc(t.why) + '</div>';
+html += '<div class="row"><button class="btn" data-t="'+t.id+'">Взять этот маршрут</button></div>';
+el.innerHTML = html;
+box.appendChild(el);
+});
+
+$('ms-note').hidden = !list.some(function(o){ return o.t.ms !== null; });
+Array.prototype.forEach.call(box.querySelectorAll('button[data-t]'), function(b){
+b.onclick = function(){
+state.target = TARGETS.find(function(x){ return x.id === b.dataset.t; });
+plan(); show('s5');
+};
+});
+}
+
+/* ---------- экран 5: план ---------- */
+var LESSONS = {
+boost: [
+['Контур без риска для данных','Что можно и чего нельзя загружать в модель. Обезличивание, российские модели, регламент для себя и команды.','Документация GigaChat и Yandex Cloud (CC BY 4.0)'],
+['Десять промптов вашей недели','Разбираем вашу реальную рутину и превращаем каждую повторяющуюся задачу в готовый промпт.','Prompt Engineering Guide, DAIR.AI — MIT, есть русская версия'],
+['Проверка за ИИ','Как ловить ошибки модели и не подписываться под её выдумками. Это то, за что вам платят.','Microsoft Generative AI for Beginners — MIT, русский перевод'],
+['Сборка помощника','Собираем одного рабочего помощника под вашу задачу и замеряем, сколько часов он снял.','Microsoft AI Agents for Beginners — MIT, русский перевод']
+],
+impl: [
+['Что вообще автоматизируют в малом бизнесе','Карта типовых процессов и где ИИ даёт быструю отдачу.','Microsoft Generative AI for Beginners — MIT'],
+['Первая автоматизация','Собираем одно решение под реальный запрос и считаем сэкономленные часы.','Microsoft AI Agents for Beginners — MIT'],
+['Безопасность и данные клиента','Обезличивание, российские модели, договор и ответственность.','Yandex Cloud docs — CC BY 4.0'],
+['Портфолио и первый клиент','Как показать результат в часах и деньгах. Вход в профессию — по портфолио, не по диплому.','—']
+],
+ana: [
+['Таблицы, которые вы уже умеете','Переносим ваш опыт отчётности на язык аналитика.','Microsoft Data Science for Beginners — MIT, русский перевод'],
+['SQL с нуля до выборок','Запросы, соединения, группировки на живых данных.','Интерактивный тренажёр по SQL, Stepik — бесплатно'],
+['Статистика без математики','Что значит «значимо» и как не наврать в выводах.','Основы статистики, Bioinformatics Institute, Stepik — бесплатно'],
+['Дашборд и защита выводов','Собираем визуализацию и учимся объяснять её людям.','Yandex DataLens docs — CC BY 4.0, на русском']
+],
+soc: [
+['Основы защиты информации','Триада, угрозы, управление рисками, нулевое доверие.','Microsoft Security-101 — CC0, полный русский перевод'],
+['Как читать события','Журналы, корреляция, что такое SIEM и зачем он нужен.','Microsoft SC-200 лабы — MIT'],
+['Реагирование на инцидент','Процесс от обнаружения до отчёта.','NIST SP 800-61 — public domain'],
+['Первые детекты','Пишем правила и проверяем их на смоделированных атаках.','Atomic Red Team — MIT; правила Sigma — Detection Rule License']
+],
+comp: [
+['Карта нормативки','ФЗ-115, ФЗ-152, ФЗ-273 — что регулирует что.','Тексты законов РФ — не охраняются авторским правом'],
+['Оценка рисков','Как строится матрица рисков и кто за что отвечает.','NIST SP 800-53 и NIST RMF — public domain'],
+['Контрольные процедуры','Как устроен внутренний контроль и его документирование.','Microsoft Security-101, модули по рискам — CC0'],
+['ИИ внутри комплаенса','Где ИИ помогает, а где под запретом.','OWASP Top 10 for LLM — только по ссылке, CC BY-SA']
+],
+proc: [
+['Закупочный цикл','От потребности до исполнения контракта.','Тексты 44-ФЗ и 223-ФЗ — не охраняются'],
+['Оценка поставщика и риски','Как считать и чем обосновывать решение.','NIST — public domain'],
+['Переговоры о цене','Подготовка, аргументы, фиксация договорённостей.','—'],
+['ИИ в закупках','Анализ предложений и подготовка документов с ИИ.','Microsoft Generative AI for Beginners — MIT']
+],
+hr: [
+['Подбор и отбор','Воронка найма, критерии, ошибки оценки.','Saylor BUS301 Human Resource Management — CC BY 3.0'],
+['Персданные кандидатов','ФЗ-152 в работе рекрутера.','Текст ФЗ-152 — не охраняется'],
+['ИИ в подборе','Промпты под воронку: вакансия, скрининг, письма кандидатам.','Prompt Engineering Guide — MIT, русская версия'],
+['Аналитика найма','Считаем воронку и объясняем цифры руководителю.','Microsoft Data Science for Beginners — MIT']
+],
+med: [
+['Что такое медиация','Процедура, рамки, границы полномочий.','Текст ФЗ-193 «О процедуре медиации» — не охраняется'],
+['Позиции и интересы','Разбор конфликта по слоям.','—'],
+['Ведение процедуры','Сессия от открытия до соглашения.','—'],
+['Документы и ответственность','Соглашение, его сила и ваши риски.','Тексты законов РФ']
+]
+};
+
+function plan(){
+var t = state.target;
+$('plan-title').textContent = 'План: ' + t.name;
+var box = $('plan'); box.innerHTML = '';
+var weeks = LESSONS[t.id] || LESSONS.boost;
+weeks.forEach(function(w, i){
+var d = document.createElement('div'); d.className = 'week';
+d.innerHTML = '<div class="n">нед.<br>'+(i+1)+'</div><div><h3>'+esc(w[0])+'</h3>'+
+'<p>'+esc(w[1])+'</p>'+
+(w[2] && w[2] !== '—' ? '<p class="src mut">Материал: '+esc(w[2])+'</p>' : '')+'</div>';
+box.appendChild(d);
+});
+}
+
+/* ---------- отправка контакта ---------- */
+$('send').onclick = function(){
+var v = $('contact').value.trim();
+if (v.length < 3){ $('contact').focus(); return; }
+if (!$('agree').checked){ $('agree').focus(); return; }
+var payload = {
+contact: v,
+consent: true,
+consentAt: new Date().toISOString(),
+policyVersion: '2026-09-12',
+prof: state.prof ? state.prof.id : null,
+profName: state.prof ? state.prof.name : (state.missing || null),
+missing: state.prof ? false : true,
+score: state.score,
+path: state.path,
+target: state.target ? state.target.id : null,
+targetName: state.target ? state.target.name : null,
+ts: new Date().toISOString()
+};
+try { localStorage.setItem('razvilka_lead', JSON.stringify(payload)); } catch(e){}
+if (window.Razvilka) window.Razvilka.goal('lead');
+var sent = false;
+// ВАЖНО: скрипт Telegram создаёт объект WebApp и в обычном браузере. Раньше sendData
+// «срабатывал» вне Telegram, человек видел «план уходит», а контакт терялся.
+// Теперь проверяем, что мы действительно внутри Telegram.
+var inTG = !!(TG && (TG.initData || (TG.platform && TG.platform !== 'unknown')));
+// Внутри Telegram с подписанными initData шлём на сервер: он проверит подпись и сам
+// напишет человеку в бота. Так лид доходит при любом способе открытия мини-приложения.
+var linked = inTG && TG.initData && window.RAZVILKA_LEAD_URL;
+if (linked) payload.initData = TG.initData;
+if (!linked && inTG && typeof TG.sendData === 'function'){
+try { TG.sendData(JSON.stringify(payload)); sent = true; } catch(e){ sent = false; }
+}
+if (!sent && window.RAZVILKA_LEAD_URL){
+$('lead').hidden = true; $('done').hidden = false;
+$('done').innerHTML = '<p style="margin:0">Отправляю…</p>';
+fetch(window.RAZVILKA_LEAD_URL, {
+method:'POST', headers:{'Content-Type':'application/json'},
+body: JSON.stringify(payload)
+}).then(function(r){
+return r.json().catch(function(){ return {}; }).then(function(j){
+$('done').innerHTML = r.ok ? savedHTML(j && j.linked) : fallbackHTML();
+});
+}).catch(function(){ $('done').innerHTML = fallbackHTML(); });
+return;
+}
+$('lead').hidden = true; $('done').hidden = false;
+$('done').innerHTML = sent
+? '<p style="margin:0"><b>Готово.</b> План уходит вам в течение минуты.</p>'
+: fallbackHTML();
+};
+
+function savedHTML(linked){
+var bot = window.RAZVILKA_BOT_URL || '';
+if (linked) return '<p style="margin:0"><b>Готово.</b> Бот уже прислал ваш маршрут и первое занятие — загляните в чат.</p>';
+return '<p style="margin:0 0 8px"><b>Контакт сохранён.</b></p>' +
+(bot ? '<p style="margin:0">Все четыре занятия приходят в Telegram — ' +
+'<a href="' + bot + '" target="_blank" rel="noopener">откройте бота</a>, ' +
+'он начнёт с первого. Это бесплатно.</p>'
+: '<p style="margin:0">Мы свяжемся с вами по оставленному контакту.</p>');
+}
+
+function fallbackHTML(){
+var bot = window.RAZVILKA_BOT_URL || '';
+return '<p style="margin:0 0 8px"><b>План готов, но отправить его отсюда не получилось.</b></p>' +
+(bot ? '<p style="margin:0"><a href="' + bot + '" target="_blank" rel="noopener">Откройте бота</a>' +
+' — он пришлёт план и все четыре занятия бесплатно.</p>'
+: '<p style="margin:0">Скопируйте маршрут с этого экрана: занятия к нему бесплатны и открыты.</p>');
+}
+
+/* ---------- шеринг ---------- */
+$('share').onclick = function(){
+var txt = state.prof
+? 'Моя профессия — ' + state.prof.name + '. По прогнозу WEF она сокращается на ' + state.prof.drop + '% к 2030 году. Посмотрел маршруты в «Учи ИИ».'
+: 'Проверил свою профессию в «Учи ИИ».';
+var url = location.href.split('#')[0];
+if (navigator.share){
+navigator.share({ title:'Учи ИИ', text:txt, url:url }).catch(function(){});
+} else if (TG && TG.openTelegramLink){
+TG.openTelegramLink('https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(txt));
+} else if (navigator.clipboard){
+navigator.clipboard.writeText(txt + ' ' + url).then(function(){
+$('share').textContent = 'Скопировано — вставьте куда угодно';
+}).catch(function(){});
+}
+};
+
+/* источники данных — в подвале сайта (site.js берёт их из data.js) */
+
+/* ---------- утилиты ---------- */
+function show(id){
+['s1','s2','s3','s4','s5'].forEach(function(x){
+var el = $(x);
+if (x === 's1') return;
+el.hidden = (x !== id);
+});
+if (id !== 's1') { var el = $(id); if (el) el.scrollIntoView({ behavior:'smooth', block:'start' }); }
+}
+
+function esc(s){
+return String(s).replace(/[&<>"']/g, function(c){
+return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+});
+}
+
+/* Модальные окна помощи и обратной связи переехали в assets/js/site.js:
+   выезжающая панель справа, которая реально отправляет обращение на сервер
+   (раньше форма показывала «Спасибо!» и никуда ничего не отправляла).
+   Вызовы openModal('help') / openModal('feedback') продолжают работать. */
+
+})();
+
+/* ---------- Раскрывающиеся блоки «Подробнее» ---------- */
+function toggleExpand(btn){
+var expandable = btn.parentElement;
+var wasOpen = expandable.classList.contains('open');
+// Закрыть все в том же контейнере
+expandable.parentElement.querySelectorAll('.expandable').forEach(function(e){
+e.classList.remove('open');
+});
+// Открыть, если был закрыт
+if (!wasOpen) expandable.classList.add('open');
+}
+</script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

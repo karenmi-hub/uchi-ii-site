@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Оплата прошла — Учи ИИ</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F6F3EC">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script>(function(d){d.className+=' no-js';try{var t=localStorage.getItem('rz-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="success">
+<div id="site-header"></div>
+<main class="status-page" data-parallax>
+  <div class="card-s reveal">
+    <div class="big" aria-hidden="true">✓</div>
+    <h1>Оплата прошла</h1>
+    <p>Спасибо! Курс появится в личном кабинете в течение минуты. Если Telegram подключён, бот тоже пришлёт сообщение. Чек самозанятого придёт отдельно.</p>
+    <p class="mut" style="font-size:14px" id="inv"></p>
+    <div class="actions">
+      <a class="btn" href="account.html">Открыть личный кабинет</a>
+      <a class="btn ghost" href="#" data-bot="start">Перейти в бота</a>
+    </div>
+    <p class="mut" style="font-size:13.5px;margin-top:18px">Прошло больше 10 минут, а сообщения нет? <a href="#support" data-support="form" data-kind="payment" data-msg="Оплатил, но доступ не открылся. Номер счёта: ">Напишите нам</a> — разберёмся.</p>
+  </div>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/config.js"></script>
+<script src="data.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+/* Робокасса возвращает сюда номер счёта. Доступ открывает не эта страница, а вебхук на сервере. */
+(function(){ var m = /[?&]InvId=(\d+)/i.exec(location.search); if (m) document.getElementById('inv').textContent = 'Номер счёта: ' + m[1]; })();
+</script>
+</body>
+</html>

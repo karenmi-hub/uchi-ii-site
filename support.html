@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Поддержка — Учи ИИ</title>
+<meta name="description" content="Вопрос, жалоба, возврат или предложение — напишите в форме, в Telegram или на почту. Отвечаем живыми людьми.">
+<meta property="og:title" content="Поддержка — Учи ИИ">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta name="theme-color" content="#F6F3EC">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script>(function(d){d.className+=' no-js';try{var t=localStorage.getItem('rz-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+.support-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:start}
+@media(max-width:900px){.support-grid{grid-template-columns:1fr}}
+.form-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;box-shadow:var(--shadow)}
+.form-card h2{font-family:var(--serif);font-size:26px;margin:0 0 6px}
+.form-card > p{color:var(--mut);margin:0 0 20px}
+.channels{display:grid;gap:12px}
+.flow{list-style:none;padding:0;margin:0;counter-reset:f}
+.flow li{position:relative;padding:0 0 18px 44px}
+.flow li::before{counter-increment:f;content:counter(f);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--mint);color:var(--brand);display:grid;place-items:center;font-weight:700;font-family:var(--serif)}
+.flow li b{display:block}
+.flow li span{color:var(--ink2);font-size:14.5px}
+</style>
+</head>
+<body data-page="support">
+<a class="skip" href="#main">К содержанию</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="page-hero" data-scene="page">
+    <div class="pl-head"><div class="container">
+      <nav class="crumbs" aria-label="Путь"><a href="index.html">Главная</a> / Поддержка</nav>
+      <h1>Напишите нам — ответит человек</h1>
+      <p class="lead">Вопрос, жалоба, возврат денег или идея — всё приходит в одно место и не теряется. Каждому обращению присваиваем номер.</p>
+    </div></div>
+  </section>
+
+  <section class="section">
+    <div class="container support-grid">
+      <div class="form-card reveal">
+        <h2>Форма обращения</h2>
+        <p>Самый надёжный способ: обращение сразу получает номер и попадает к нам в Telegram.</p>
+        <div data-support-inline></div>
+      </div>
+
+      <aside>
+        <div class="reveal">
+          <h3 style="font-family:var(--serif);font-size:20px;margin:0 0 14px">Другие способы</h3>
+          <div class="channels" id="channels"></div>
+        </div>
+
+        <div class="reveal" style="margin-top:34px">
+          <h3 style="font-family:var(--serif);font-size:20px;margin:0 0 16px">Что происходит с жалобой</h3>
+          <ol class="flow">
+            <li><b>Получаем и присваиваем номер</b><span>Обращение сразу приходит нам в Telegram.</span></li>
+            <li><b>Разбираемся</b><span>Жалобы и вопросы об оплате — в первую очередь.</span></li>
+            <li><b>Отвечаем на ваш контакт</b><span>Обычно в течение рабочего дня. Официальный срок по претензиям — 10 дней по оферте.</span></li>
+            <li><b>Исправляем причину</b><span>Если проблема на нашей стороне — чиним, а не только извиняемся.</span></li>
+          </ol>
+        </div>
+
+        <div class="callout reveal">
+          <span class="tag">Уже учитесь?</span>
+          <p>Напишите вопрос прямо боту — одним сообщением. Команда <b>удалить</b> стирает ваши данные сразу.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container narrow">
+      <div class="section-head reveal"><h2 class="section-title">Быстрые ответы</h2></div>
+      <details class="acc reveal"><summary>Не пришло занятие после навигатора</summary><div class="acc-body"><p>Откройте бота и нажмите «Старт» — Telegram не разрешает ботам писать первыми. После этого нажмите «📚 Занятия».</p></div></details>
+      <details class="acc reveal"><summary>Оплатил, а доступ не открылся</summary><div class="acc-body"><p>Обычно доступ открывается за несколько секунд. Если прошло больше 10 минут — выберите в форме «Оплата, возврат» и укажите дату и сумму. Номер карты не присылайте.</p></div></details>
+      <details class="acc reveal"><summary>Разбор не пришёл</summary><div class="acc-body"><p>Если сервис разбора не ответил, работа встаёт в очередь и разбирается автоматически. После трёх неудачных попыток её получает человек и отвечает вручную.</p></div></details>
+      <details class="acc reveal"><summary>Хочу вернуть деньги</summary><div class="acc-body"><p>Выберите «Оплата, возврат» и напишите «прошу вернуть» с датой оплаты. Возвращаем пропорционально неиспользованным дням, срок — до 10 дней. <a href="offer.html">Оферта, п. 5</a>.</p></div></details>
+      <p style="margin-top:18px"><a href="faq.html">Все частые вопросы →</a></p>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/config.js"></script>
+<script src="data.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+/* Каналы связи берутся из config.js: не заполнено — не показываем */
+(function(){
+  var C = window.RAZVILKA || {}, box = document.getElementById('channels');
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  var tgIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11l6 2 2 6 3-4 5 4 2-15Z"/><path d="m9 13 8-6"/></svg>';
+  var mailIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>';
+  var botIco = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6"/></svg>';
+  var html = '';
+  if (C.SUPPORT_TG) html += '<a class="quick-link" href="https://t.me/' + esc(C.SUPPORT_TG.replace(/^@/, '')) + '" target="_blank" rel="noopener"><span class="qi">' + tgIco + '</span><span><b>Telegram</b><span class="s">@' + esc(C.SUPPORT_TG.replace(/^@/, '')) + '</span></span></a>';
+  if (C.BOT_URL) html += '<a class="quick-link" href="' + esc(C.BOT_URL) + '?start=support" target="_blank" rel="noopener"><span class="qi">' + botIco + '</span><span><b>Бот «Учи ИИ»</b><span class="s">если вы уже учитесь</span></span></a>';
+  if (C.SUPPORT_EMAIL) html += '<a class="quick-link" href="mailto:' + esc(C.SUPPORT_EMAIL) + '"><span class="qi">' + mailIco + '</span><span><b>Почта</b><span class="s">' + esc(C.SUPPORT_EMAIL) + ' · для претензий по оферте</span></span></a>';
+  box.innerHTML = html || '<p class="mut">Пока доступна только форма слева.</p>';
+})();
+</script>
+</body>
+</html>

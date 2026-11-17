@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Программа — Учи ИИ</title>
+<meta name="description" content="Четыре бесплатных занятия по работе с ИИ: безопасность данных, промпты, проверка за моделью, сборка помощника. И семь смежных профессий, куда засчитывается ваш опыт.">
+<meta property="og:title" content="Программа «Учи ИИ» — четыре занятия и модуль «Нейросети на практике»">
+<meta property="og:description" content="5–7 минут чтения и одно задание из вашей реальной работы. Материал бесплатный, из открытых источников.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta name="theme-color" content="#F6F3EC">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script>(function(d){d.className+=' no-js';try{var t=localStorage.getItem('rz-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+.route-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;gap:10px;transition:transform .3s var(--ease), box-shadow .3s}
+.route-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.route-card h3{font-family:var(--serif);font-size:20px;line-height:1.25;margin:0}
+.route-card .meta{display:flex;flex-wrap:wrap;gap:6px}
+.route-card .chip{font-family:var(--mono);font-size:11.5px;padding:4px 10px;border-radius:999px;background:var(--sunk);color:var(--ink2)}
+.route-card .chip.g{background:var(--mint);color:var(--brand)}
+.route-card .chip.w{background:var(--warn-soft);color:var(--warn)}
+.route-card p{margin:0;color:var(--ink2);font-size:15px}
+.route-card .demand{font-size:14px;color:var(--ink2);border-top:1px dashed var(--line);padding-top:10px}
+.route-card .demand b{color:var(--brand)}
+.route-card .learn{font-size:14px;color:var(--mut)}
+.format{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:820px){.format{grid-template-columns:1fr}}
+.two-col{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:start}
+@media(max-width:900px){.two-col{grid-template-columns:1fr;gap:28px}}
+.sticky{position:sticky;top:calc(var(--hdr) + 24px)}
+</style>
+</head>
+<body data-page="program">
+<a class="skip" href="#main">К содержанию</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="page-hero" data-scene="page">
+    <div class="pl-head"><div class="container">
+      <nav class="crumbs" aria-label="Путь"><a href="index.html">Главная</a> / Программа</nav>
+      <h1>Четыре занятия и модуль. Одно умение в каждом</h1>
+      <p class="lead">Дорога A — усилить свою профессию за четыре недели. Дорога Б — перейти в смежную, где засчитывается ваш опыт. Учебный материал бесплатный и открытый.</p>
+    </div></div>
+  </section>
+
+  <!-- ФОРМАТ -->
+  <section class="section tight">
+    <div class="container">
+      <div class="format">
+        <div class="tile reveal"><h3>5–7 минут чтения</h3><p>Без видео: текст не устаревает, его удобно перечитать в метро и переслать коллеге.</p></div>
+        <div class="tile reveal" data-delay="1"><h3>Задание из вашей работы</h3><p>Не абстрактные упражнения, а ваша реальная задача недели. Так навык сразу приносит пользу.</p></div>
+        <div class="tile reveal" data-delay="2"><h3>Разбор — по желанию</h3><p>Занятия бесплатны. Платно — только разбор ваших работ: что верно и что переписать, с примерами.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ДОРОГА A -->
+  <section class="section" id="boost">
+    <div class="container two-col">
+      <div class="sticky reveal">
+        <span class="kicker">Дорога A · 4 недели</span>
+        <h2 class="section-title">Усилить свою профессию</h2>
+        <p class="section-lead">Вы остаётесь тем, кто вы есть. ИИ забирает рутину, вы — проверку и ответственность. Именно это ищут в вакансиях с надбавкой.</p>
+        <div class="callout" style="margin-top:22px">
+          <span class="tag">Что говорят данные</span>
+          <p>hh.ru: вакансий с требованием ИИ-навыков стало в 2,7 раза больше за год, медианная зарплата в них на 11% выше рынка. <a href="https://www.cnews.ru/news/line/2026-09-01_spros_na_ii-navyki_rastet" target="_blank" rel="noopener">Источник</a></p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px">
+          <a class="btn" href="#" data-bot="lessons">Получить занятия в Telegram</a>
+          <a class="btn ghost" href="index.html#start">Сначала пройти навигатор</a>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step-item reveal">
+          <div>
+            <span class="meta">Неделя 1 · безопасность</span>
+            <h3>Контур без риска для данных</h3>
+            <p>Что можно загружать в модель, а что нельзя. Правило одной строки: ничего, по чему можно опознать человека или компанию. Шаблон обезличивания и регламент на одну страницу.</p>
+            <div class="task"><b>Задание</b>Возьмите реальную задачу недели с чужими данными и опишите, что на что вы замените перед отправкой в модель.</div>
+            <p class="meta" style="margin-top:10px">Материал: документация GigaChat и Yandex Cloud (CC BY 4.0)</p>
+          </div>
+        </div>
+        <div class="step-item reveal">
+          <div>
+            <span class="meta">Неделя 2 · промпты</span>
+            <h3>Десять промптов вашей недели</h3>
+            <p>Промпт — это техническое задание толковому стажёру: роль, задача, вход, формат. Разбираем вашу рутину и превращаем повторяющиеся задачи в готовые промпты.</p>
+            <div class="task"><b>Задание</b>Три промпта под ваши реальные задачи по схеме роль → задача → вход → формат.</div>
+            <p class="meta" style="margin-top:10px">Материал: Prompt Engineering Guide, DAIR.AI — MIT, есть русская версия</p>
+          </div>
+        </div>
+        <div class="step-item reveal">
+          <div>
+            <span class="meta">Неделя 3 · проверка</span>
+            <h3>Проверка за ИИ — то, за что вам платят</h3>
+            <p>Модель уверенно ошибается. Три проверки ловят почти всё: арифметика, источник, полнота. Под документом стоит ваша фамилия, а не название модели.</p>
+            <div class="task"><b>Задание</b>Дайте модели рабочую задачу и найдите ошибку в её ответе. Опишите, как проверяли.</div>
+            <p class="meta" style="margin-top:10px">Материал: Microsoft, Generative AI for Beginners — MIT</p>
+          </div>
+        </div>
+        <div class="step-item reveal">
+          <div>
+            <span class="meta">Неделя 4 · результат</span>
+            <h3>Сборка помощника и замер</h3>
+            <p>Один большой промпт с вашими правилами и примерами под повторяющийся процесс. И обязательный замер: сколько минут задача занимала до и сколько после.</p>
+            <div class="task"><b>Итоговое задание</b>Помощник, его промпт и замер «было — стало» в минутах. Это первая строка вашего портфолио.</div>
+            <p class="meta" style="margin-top:10px">Материал: Microsoft, AI Agents for Beginners — MIT</p>
+          </div>
+        </div>
+        <div class="step-item reveal">
+          <div>
+            <span class="meta">Модуль «Нейросети на практике» · входит в курс</span>
+            <h3>Четыре нейросети: кого для чего брать</h3>
+            <p>DeepSeek, Qwen, Gemini и Claude — в чём каждая сильна, куда уходят ваши данные и что делать, если сервис в России не открывается. Только законные пути.</p>
+            <div class="task"><b>Задание</b>Три задачи вашей недели: какую нейросеть возьмёте и что уберёте из текста.</div>
+            <p class="meta" style="margin-top:10px"><a href="tools.html#pick">Попробовать подбор в тренажёре →</a></p>
+          </div>
+        </div>
+        <div class="step-item reveal">
+          <div>
+            <span class="meta">Модуль · DeepSeek и Qwen</span>
+            <h3>Рассуждение, поиск, документы и сканы</h3>
+            <p>Когда включать DeepThink и как читать ход рассуждения. Как Qwen читает договор на сотню страниц и фото бумаги — и почему к каждой строке ответа нужна цитата.</p>
+            <div class="task"><b>Задания</b>Расчёт без рассуждения и с ним; выписка из документа с проверкой по оригиналу.</div>
+          </div>
+        </div>
+        <div class="step-item reveal">
+          <div>
+            <span class="meta">Модуль · Gemini и Claude</span>
+            <h3>Исследование, свои помощники, проекты</h3>
+            <p>Deep Research и Gems в Gemini, проекты и артефакты в Claude. Официально в России оба недоступны — уроки для тех, у кого есть законный доступ, а приёмы работают в любой нейросети.</p>
+            <div class="task"><b>Задания</b>Инструкция своего помощника и проект для повторяющейся работы.</div>
+            <p class="meta" style="margin-top:10px"><a href="tools.html">Открыть тренажёр: тур по кнопкам, секретные слова, светофор данных →</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pband" data-parallax aria-label="Цитата">
+    <div class="container reveal">
+      <blockquote>Обещать пятидесятилетнему бухгалтеру новую профессию за месяц нечестно. Обещать <em>восемь свободных часов в неделю</em> — выполнимо и проверяемо.</blockquote>
+      <cite>Почему дорога A стоит первой</cite>
+    </div>
+  </section>
+
+  <!-- ДОРОГА Б -->
+  <section class="section" id="routes">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">Дорога Б · от 2 месяцев</span>
+        <h2 class="section-title">Смежные профессии, где засчитывается ваш опыт</h2>
+        <p class="section-lead">Не «куда ИИ не дойдёт», а туда, где есть спрос, решение подписывает человек и ваш опыт не обнуляется. Вход дольше и труднее, чем обещают курсы, — срок указан честно.</p>
+      </div>
+      <div class="grid c3" id="routes-list"></div>
+      <div class="callout warn reveal" style="margin-top:28px">
+        <span class="tag">О балле ИИ</span>
+        <p>Балл взят из открытого датасета Microsoft Research: он показывает, <b>насколько ИИ уже применяется</b> в профессии, и измерен на диалогах пользователей в США за 2024 год. Авторы предупреждают, что его нельзя трактовать как способность ИИ заменить профессию. Мы приводим его как справку, а не как прогноз.</p>
+      </div>
+      <p class="mut" style="font-size:14.5px">Процент совпадения вашего опыта с каждой профессией навигатор считает лично для вас. <a href="index.html#start">Пройти навигатор →</a></p>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="cta-box reveal">
+        <div>
+          <h2>С чего начать? С двух минут в навигаторе</h2>
+          <p>Он покажет, какая дорога ближе именно вам, и соберёт план на четыре недели.</p>
+        </div>
+        <div class="actions">
+          <a class="btn light" href="index.html#start">Проверить профессию <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn ghost" href="pricing.html">Тарифы</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/config.js"></script>
+<script src="data.js"></script>
+<script>
+/* Маршруты дороги Б берутся из data.js — правите там, меняется здесь */
+(function(){
+  var box = document.getElementById('routes-list');
+  if (!box || typeof TARGETS === 'undefined') return;
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  TARGETS.filter(function(t){ return t.type === 'move'; })
+    .sort(function(a,b){ return (a.months||0) - (b.months||0); })
+    .forEach(function(t, i){
+      var learn = (t.teaches || []).map(function(s){ return SKILLS[s]; }).filter(Boolean);
+      var el = document.createElement('article');
+      el.className = 'route-card reveal';
+      el.setAttribute('data-delay', String(i % 3));
+      el.innerHTML =
+        '<div class="meta"><span class="chip ' + ((t.months||0) >= 9 ? 'w' : 'g') + '">' + esc(t.term) + '</span>' +
+        (t.ms !== null ? '<span class="chip">балл ИИ ' + String(t.ms).replace('.', ',') + ' · медиана ' + String(MS_MEDIAN).replace('.', ',') + '</span>' : '') + '</div>' +
+        '<h3>' + esc(t.name) + '</h3>' +
+        '<p>' + esc(t.why) + '</p>' +
+        (learn.length ? '<p class="learn">Чему научим: ' + esc(learn.join(', ')) + '</p>' : '') +
+        (t.demandLabel
+          ? '<p class="demand"><b>Спрос подтверждён:</b> ' + esc(t.demandLabel) + '</p>'
+          : '<p class="demand">Отдельных данных о росте спроса у нас нет — не выдумываем.</p>');
+      box.appendChild(el);
+    });
+})();
+</script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

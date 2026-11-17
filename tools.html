@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Нейросети на практике — Учи ИИ</title>
+<meta name="description" content="DeepSeek, Qwen, Gemini и Claude: какую нейросеть взять под задачу, где какие кнопки, что можно им доверить и как написать запрос. Тренажёр с заданиями.">
+<meta property="og:title" content="Нейросети на практике: DeepSeek, Qwen, Gemini, Claude">
+<meta property="og:description" content="Подбор нейросети под задачу, тур по кнопкам, светофор данных и конструктор запроса.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta name="theme-color" content="#F6F3EC">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script>(function(d){d.className+=' no-js';try{var t=localStorage.getItem('rz-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/tools.css">
+</head>
+<body data-page="tools">
+<a class="skip" href="#main">К содержанию</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="page-hero" data-scene="page">
+    <div class="pl-head"><div class="container">
+      <nav class="crumbs" aria-label="Путь"><a href="index.html">Главная</a> / <a href="courses.html">Курсы</a> / Нейросети на практике</nav>
+      <span class="kicker">Модуль курса «ИИ в вашей работе»</span>
+      <h1>Нейросети на практике</h1>
+      <p class="lead">DeepSeek, Qwen, Gemini и Claude: какую взять под задачу, где какие кнопки, что им можно доверить и как написать запрос. Здесь всё нажимается.</p>
+      <ol class="t-steps" aria-label="Разделы">
+        <li><a href="#pick"><b>1</b>Подобрать</a></li>
+        <li><a href="#tour"><b>2</b>Тур по кнопкам</a></li>
+        <li><a href="#light"><b>3</b>Светофор данных</a></li>
+        <li><a href="#build"><b>4</b>Собрать запрос</a></li>
+        <li><a href="#quiz"><b>5</b>Проверить себя</a></li>
+        <li><a href="#chat"><b>6</b>Чат с ИИ</a></li>
+      </ol>
+    </div></div>
+  </section>
+
+  <!-- ЗНАКОМСТВО -->
+  <section class="section tight" id="meet-s">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Знакомьтесь: четыре нейросети</h2>
+        <p class="section-lead">У каждой — свои теги и секретные слова. Нажмите на карточку — откроется тур по её кнопкам.</p>
+      </div>
+      <div class="meet" id="meet"></div>
+      <p class="tm-note">Логотипы — товарные знаки их владельцев. Они показаны, чтобы сервис было легко узнать; «Учи ИИ» с этими компаниями не связан.</p>
+    </div>
+  </section>
+
+  <!-- 1. ПОДБОР -->
+  <section class="section" id="pick">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Шаг 1</span>
+        <h2 class="section-title">Какую нейросеть взять</h2>
+        <p class="section-lead">Три вопроса — и ответ с объяснением. Меняйте ответы и смотрите, как меняется совет.</p>
+      </div>
+      <div class="pick-grid">
+        <div class="pick-q">
+          <fieldset><legend>Что нужно сделать?</legend><div class="chips" data-q="task"></div></fieldset>
+          <fieldset><legend>Какие данные в задаче?</legend><div class="chips" data-q="data"></div></fieldset>
+          <fieldset><legend>Где вы работаете?</legend><div class="chips" data-q="where"></div></fieldset>
+        </div>
+        <div class="pick-out" id="pick-out" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ТУР -->
+  <section class="section alt" id="tour">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Шаг 2</span>
+        <h2 class="section-title">Тур по кнопкам</h2>
+        <p class="section-lead">Схема окна каждой нейросети. Нажимайте на кружки с цифрами — расскажем, что делает кнопка и когда её включать. Это схема, а не снимок экрана: кнопки могут называться чуть иначе.</p>
+      </div>
+      <div class="tour-tabs" role="tablist" id="tour-tabs"></div>
+      <div id="tour-body" class="tour-body"><p class="mut">Загружаем…</p></div>
+    </div>
+  </section>
+
+  <!-- 3. СВЕТОФОР -->
+  <section class="section" id="light">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Шаг 3</span>
+        <h2 class="section-title">Светофор: можно ли это отправить?</h2>
+        <p class="section-lead">Восемь настоящих рабочих ситуаций. Решите, что делать с каждым текстом перед отправкой в облачную нейросеть.</p>
+      </div>
+      <div class="light-score" id="light-score" aria-live="polite"></div>
+      <div class="light-grid" id="light-grid"></div>
+    </div>
+  </section>
+
+  <!-- 4. КОНСТРУКТОР -->
+  <section class="section alt" id="build">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Шаг 4</span>
+        <h2 class="section-title">Соберите запрос</h2>
+        <p class="section-lead">Заполните поля — справа соберётся готовый запрос. Если вставите в данные что-то похожее на ИНН, телефон или почту, мы предупредим.</p>
+      </div>
+      <div class="build-grid">
+        <form class="build-form" id="build-form" autocomplete="off">
+          <div class="field"><label class="l" for="b-role">Кем должна быть модель</label><input type="text" id="b-role" name="role" placeholder="например, опытный бухгалтер на аутсорсе"></div>
+          <div class="field"><label class="l" for="b-task">Задача одним предложением</label><input type="text" id="b-task" name="task" placeholder="например, разнести операции из выписки по группам"></div>
+          <div class="field"><label class="l" for="b-data">Данные <span class="opt">— обезличенные</span></label><textarea id="b-data" name="data" rows="4" placeholder="вставьте текст или таблицу"></textarea></div>
+          <div class="field"><label class="l" for="b-format">Каким должен быть ответ</label><input type="text" id="b-format" name="format" placeholder="например, таблица: дата, сумма, группа"></div>
+          <div class="field"><label class="l" for="b-check">Как проверить <span class="opt">— необязательно</span></label><input type="text" id="b-check" name="check" placeholder="например, спорные строки отметь словом ПРОВЕРИТЬ"></div>
+          <label class="switch"><input type="checkbox" id="b-think"><span></span>Будет включён режим рассуждения (DeepThink, Thinking)</label>
+        </form>
+        <div class="build-out">
+          <div class="build-warn" id="build-warn" hidden></div>
+          <pre id="build-prompt" class="prompt-box" tabindex="0"></pre>
+          <div class="build-actions"><button class="btn" type="button" id="build-copy">Скопировать запрос</button>
+          <a class="btn ghost" href="#chat" id="build-send">Отправить в чат →</a></div>
+          <ul class="build-tips" id="build-tips"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ТЕСТ -->
+  <section class="section" id="quiz">
+    <div class="container narrow">
+      <div class="section-head center">
+        <span class="kicker">Шаг 5</span>
+        <h2 class="section-title">Проверьте себя</h2>
+        <p class="section-lead">Шесть вопросов. Ответ и объяснение — сразу после выбора.</p>
+      </div>
+      <div id="quiz-box"></div>
+    </div>
+  </section>
+
+  <!-- 6. ЧАТ -->
+  <section class="section alt" id="chat">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Шаг 6</span>
+        <h2 class="section-title">Поговорите с ИИ</h2>
+        <p class="section-lead">Попробуйте всё, чему научились, прямо здесь: выберите нейросеть и напишите задачу. Есть бесплатная модель — регистрация не нужна.</p>
+      </div>
+      <div class="chat" id="chat-app">
+        <div class="chat-models" id="chat-models" role="tablist" aria-label="Нейросеть"></div>
+        <div class="chat-log" id="chat-log" aria-live="polite"></div>
+        <div class="chat-warn" id="chat-warn" hidden></div>
+        <form class="chat-input" id="chat-form" autocomplete="off">
+          <textarea id="chat-text" rows="1" placeholder="Напишите задачу: что сделать, данные, каким должен быть ответ" aria-label="Сообщение"></textarea>
+          <button class="btn" type="submit" id="chat-send" aria-label="Отправить">Отправить</button>
+        </form>
+        <div class="chat-foot"><span id="chat-left"></span><span>Сообщения уходят выбранной нейросети. Мы их не храним. Не отправляйте персональные данные.</span><button type="button" class="link" id="chat-clear">Очистить</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Курсы по нейросетям</span>
+        <h2 class="section-title">Возьмите курс по своей нейросети</h2>
+        <p class="section-lead">Тур по кнопкам, секретные слова, два занятия с заданиями и готовые запросы — 990 ₽ разово, доступ навсегда. Все сразу и разбор ваших работ — в курсе «ИИ в вашей работе».</p>
+      </div>
+      <div class="aic-grid" data-ai-courses></div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/config.js"></script>
+<script src="data.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/tools.js"></script>
+</body>
+</html>

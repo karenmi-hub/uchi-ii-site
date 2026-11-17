@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>О проекте — Учи ИИ</title>
+<meta name="description" content="«Учи ИИ» — честный навигатор по профессиям в эпоху ИИ. Ни одного числа без источника, только открытые материалы, данные в России, никаких обещаний дохода.">
+<meta property="og:title" content="О проекте «Учи ИИ»">
+<meta property="og:description" content="Ни одного числа без источника. Основа бесплатна, платят за курс с разбором работ.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta name="theme-color" content="#F6F3EC">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script>(function(d){d.className+=' no-js';try{var t=localStorage.getItem('rz-theme');if(t)d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr;gap:28px}}
+.formula{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--shadow)}
+.formula .row-f{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid var(--line);font-size:15px}
+.formula .row-f:first-of-type{border-top:0}
+.formula .row-f b{font-family:var(--mono);font-weight:600;white-space:nowrap}
+.formula .up{color:var(--bad)} .formula .down{color:var(--brand)}
+.src-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.src-list li a{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;color:var(--ink);transition:border-color .2s, background .2s}
+.src-list li a:hover{border-color:var(--brand);background:var(--brand-soft)}
+.src-list li a::before{content:"↗";color:var(--brand);font-weight:700;flex:none}
+.lic{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:620px){.lic{grid-template-columns:1fr}}
+.lic div{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;font-size:14.5px}
+.lic b{display:block}
+.lic span{font-family:var(--mono);font-size:12px;color:var(--brand)}
+.lic.no div{background:var(--sunk)}
+.lic.no span{color:var(--bad)}
+</style>
+</head>
+<body data-page="about">
+<a class="skip" href="#main">К содержанию</a>
+<div id="site-header"></div>
+
+<main id="main">
+  <section class="page-hero" data-scene="page">
+    <div class="pl-head"><div class="container">
+      <nav class="crumbs" aria-label="Путь"><a href="index.html">Главная</a> / О проекте</nav>
+      <h1>Честный навигатор в шумной теме</h1>
+      <p class="lead">Про ИИ и профессии сейчас пишут либо «всех заменят», либо «станьте промпт-инженером за месяц». Мы сделали инструмент, который показывает данные с источниками и даёт план, выполнимый при любом прогнозе.</p>
+    </div></div>
+  </section>
+
+  <!-- ЗАЧЕМ -->
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <span class="kicker">Зачем мы это делаем</span>
+        <h2 class="section-title">Страх — плохой советчик при выборе профессии</h2>
+        <div class="prose">
+          <p>Бухгалтеры, секретари, операционисты банков, юридические секретари — профессии из топ-15 сокращающихся по прогнозу WEF. Люди в них слышат про ИИ каждый день, но почти никто не показывает им, что именно меняется и что делать завтра утром.</p>
+          <p>Мы начинаем не со смены профессии, а с усиления своей: это короче, дешевле и чаще срабатывает. Переход в смежную профессию показываем тоже — с честным сроком и без обещаний.</p>
+        </div>
+      </div>
+      <div class="reveal" data-delay="1">
+        <div class="callout">
+          <span class="tag">Почему дорога A первая</span>
+          <p>PwC: роли, где ИИ забирает рутину, а человек усиливается экспертизой, растут вдвое быстрее рынка. Brookings: государственные программы переобучения в США не дали значимого прироста заработка за 30 месяцев.</p>
+          <p style="font-size:13.5px"><a href="https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-jobs-barometer.html" target="_blank" rel="noopener">PwC</a> · <a href="https://www.brookings.edu/articles/ai-labor-displacement-and-the-limits-of-worker-retraining/" target="_blank" rel="noopener">Brookings</a></p>
+        </div>
+        <div class="callout warn">
+          <span class="tag">И о точности прогнозов</span>
+          <p>Оценка «47% профессий исчезнут» (2013) не подтвердилась: корреляция прогноза с реальностью составила 0,26. Поэтому любое наше число — ориентир для размышления, а не приговор.</p>
+          <p style="font-size:13.5px"><a href="https://itif.org/publications/2022/09/30/oops-the-predicted-47-percent-of-job-loss-from-ai-didnt-happen/" target="_blank" rel="noopener">ITIF</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПРИНЦИПЫ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">Красные линии</span>
+        <h2 class="section-title">Пять правил, за которые мы не заходим</h2>
+        <p class="section-lead">Это не про мораль. Именно такие ошибки губят проекты про обучение на второй месяц.</p>
+      </div>
+      <div class="grid c3">
+        <div class="tile reveal"><div class="num-big">1</div><h3>Ни одного числа без источника</h3><p>Каждая цифра на сайте ведёт к первоисточнику. Нет данных — так и пишем: «не выдумываем».</p></div>
+        <div class="tile reveal" data-delay="1"><div class="num-big">2</div><h3>Не обещаем работу и доход</h3><p>Мы даём навык и разбираем, как вы им пользуетесь. Решение о карьере остаётся за вами.</p></div>
+        <div class="tile reveal" data-delay="2"><div class="num-big">3</div><h3>Не пугаем</h3><p>Никакой рекламы на страхе «потерять всё». Спокойный тон и данные с оговорками авторов.</p></div>
+        <div class="tile reveal"><div class="num-big">4</div><h3>Только открытые лицензии</h3><p>Материалы под MIT, CC0, CC BY, Apache 2.0 — с атрибуцией в каждом занятии. Некоммерческие не берём.</p></div>
+        <div class="tile reveal" data-delay="1"><div class="num-big">5</div><h3>Данные — в России и по минимуму</h3><p>Спрашиваем только контакт. Не собираем возраст, зарплату и место работы. «Удалить» в боте стирает всё.</p></div>
+        <div class="tile reveal" data-delay="2" style="background:var(--brand-soft);border-color:var(--mint-2)"><div class="num-big">✓</div><h3>Говорим, чего нет</h3><p>Сертификата и закрытого чата у нас пока нет — и в оффере их тоже нет. Появятся — скажем отдельно.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pband" data-parallax aria-label="Цитата">
+    <div class="container reveal">
+      <blockquote>Под документом стоит <em>ваша фамилия</em>, а не название модели. Поэтому вашу работу нельзя отдать ИИ целиком — и поэтому стоит научиться им пользоваться.</blockquote>
+      <cite>Из третьего занятия</cite>
+    </div>
+  </section>
+
+  <!-- КАК СЧИТАЕМ -->
+  <section class="section" id="method">
+    <div class="container split">
+      <div class="reveal">
+        <span class="kicker">Как мы считаем оценку</span>
+        <h2 class="section-title">Прозрачная формула вместо «чёрного ящика»</h2>
+        <div class="prose">
+          <p>Основа — прогноз WEF по вашей профессии. Дальше его сдвигают ваши ответы: доля рутины повышает оценку, доля личной ответственности и живого общения понижает.</p>
+          <p><b>Это наша собственная шкала, а не показатель из исследования.</b> Мы придумали её, чтобы разговор был о вашей работе, а не о средней по больнице. Формула целиком лежит в открытом коде страницы.</p>
+        </div>
+      </div>
+      <div class="formula reveal" data-delay="1">
+        <div class="row-f"><span>База — прогноз WEF по профессии</span><b>−24% → 48</b></div>
+        <div class="row-f"><span>Рутина с документами и таблицами</span><b class="up">повышает</b></div>
+        <div class="row-f"><span>Нестандартные задачи</span><b class="up">чуть повышает</b></div>
+        <div class="row-f"><span>Решения под вашу ответственность</span><b class="down">понижает</b></div>
+        <div class="row-f"><span>Живое общение и переговоры</span><b class="down">понижает</b></div>
+        <div class="row-f"><span>Итог ограничен</span><b>от 5 до 95</b></div>
+        <p class="mut" style="font-size:13px;margin:10px 0 0">Пример для бухгалтера. Важны пропорции между ползунками, а не их сумма.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight" style="padding-top:0">
+    <div class="container">
+      <div class="callout reveal">
+        <span class="tag">Источники и лицензии</span>
+        <p>Полный список источников данных и лицензий учебных материалов — <a href="#sources">внизу страницы</a>, в подвале сайта. Он одинаковый на всех страницах и берётся из одного файла.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="container">
+      <div class="cta-box reveal">
+        <div>
+          <h2>Нашли ошибку в данных?</h2>
+          <p>Напишите — проверим по первоисточнику и исправим. Ошибки, которые играют в нашу пользу, мы считаем худшими.</p>
+        </div>
+        <div class="actions">
+          <a class="btn light" href="#support" data-support="form" data-kind="idea" data-msg="Кажется, ошибка в данных: ">Сообщить об ошибке</a>
+          <a class="btn ghost" href="index.html#start">К навигатору</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/config.js"></script>
+<script src="data.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
